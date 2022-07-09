@@ -11,6 +11,7 @@ import Login from "./pages/Login";
 import ProtectedRoute from "./pages/ProtectedRoute";
 import SharedProductsLayout from "./pages/SharedProductsLayout";
 import Cart from "./components/Cart";
+import CartSection from "./pages/CartSection";
 
 function App() {
   const [user, setUser] = useState(null);
@@ -28,8 +29,12 @@ function App() {
           <Route index element={<Home />} />
           <Route path="about" element={<About />} />
 
-          <Route path="products" element={<SharedProductsLayout />}>
+          <Route
+            path="products"
+            element={<SharedProductsLayout numberOfItems={inCart.length} />}
+          >
             <Route index element={<Products />} />
+
             <Route
               path=":productId"
               element={<SingleProduct addToCart={addToCart} />}
@@ -45,6 +50,7 @@ function App() {
               </ProtectedRoute>
             }
           />
+          <Route path="cart" element={<CartSection />} />
 
           <Route path="*" element={<Error />} />
         </Route>

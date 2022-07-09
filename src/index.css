@@ -293,3 +293,15 @@ ul {
   width: 200px;
   height: 150px;
 }
+
+/* my own styling */
+
+.cart-preview-corner {
+  position: absolute;
+  right: 30rem;
+}
+
+.cart-preview-number {
+  font-size: 3rem;
+  color: black;
+}
