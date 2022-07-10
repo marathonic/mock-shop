@@ -305,3 +305,29 @@ ul {
   font-size: 3rem;
   color: black;
 }
+
+.cart-section {
+  display: flex;
+  flex-direction: column;
+  height: auto;
+  width: 100%;
+
+}
+
+.cart-section-item {
+  display: flex;
+  min-width: 100%;
+  margin: 1rem;
+}
+
+
+.cart-section-item img {
+  max-width: 7rem;
+}
+
+
+.cart-section-item-name {
+  margin-left: 0.5rem;
+  font-weight: bold;
+  color: rebeccapurple;
+}

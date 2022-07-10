@@ -31,7 +31,12 @@ function App() {
 
           <Route
             path="products"
-            element={<SharedProductsLayout numberOfItems={inCart.length} />}
+            element={
+              <SharedProductsLayout
+                numberOfItems={inCart.length}
+                inCart={inCart}
+              />
+            }
           >
             <Route index element={<Products />} />
 
@@ -50,7 +55,7 @@ function App() {
               </ProtectedRoute>
             }
           />
-          <Route path="cart" element={<CartSection />} />
+          <Route path="cart" element={<CartSection inCart={inCart} />} />
 
           <Route path="*" element={<Error />} />
         </Route>
