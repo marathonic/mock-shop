@@ -1,7 +1,13 @@
 import React from "react";
 import { nanoid } from "nanoid";
 
-const CartSection = ({ inCart }) => {
+// READ NOW!!!! 11 JUL.
+//LET'S ALSO PASS IN
+
+const CartSection = ({ inCart, itemsInCart }) => {
+  //READ NOW!!! 11 JUL.
+  // Let's look at itemsInCart here to display the number of each item in cart.
+
   // const filteredItems = inCart.filter((item) => inCart.indexOf(item) !== -1);
   //
   //Option 2: make a new Set with no repeated elements (in this case, our item objects)
