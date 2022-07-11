@@ -22,7 +22,13 @@ const CartSection = ({ inCart, itemsInCart }) => {
       <article className="cart-section-item" key={nanoid()}>
         <img src={itemObj.image} alt={itemObj.name} />
         {/* Replace below with anchor tag that links to that product's own page */}
-        <span className="cart-section-item-name">{itemObj.name}</span>
+        <div className="cart-section-details">
+          <span className="cart-section-item-name">{itemObj.name}</span>
+          <div className="cart-section-quantity">
+            <h5>Quantity:</h5>
+            <h5>{itemsInCart[itemObj.name]}</h5>
+          </div>
+        </div>
         {/* CONTINUATION: And here, just get the number of times the itemObj is found inside of allItems */}
         {/* Once we have stored that number, we can display it in a <span> or whatever, it'll say, for example: 1, or maybe: 4, etc. */}
       </article>

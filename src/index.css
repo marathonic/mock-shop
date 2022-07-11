@@ -331,3 +331,7 @@ ul {
   font-weight: bold;
   color: rebeccapurple;
 }
+
+.cart-section-quantity {
+  display:flex;
+}

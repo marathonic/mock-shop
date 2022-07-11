@@ -20,7 +20,7 @@ const SingleProduct = (props) => {
         add to cart
       </button>
 
-      {/* READ NOW!!! 11 JUL. 
+      {/* READ NOW!!! 11 JUL. (now doing this above)
       Let's try using addItemToCart here to add the item to our object,
       the one that looks like:
       {
