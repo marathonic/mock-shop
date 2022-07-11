@@ -28,6 +28,13 @@ function App() {
     console.log(inCart);
   };
 
+  const removeFromCartTotally = (itemId) => {
+    setInCart((prevInCart) => {
+      const filtered = prevInCart.filter((itemObj) => itemObj.id !== itemId);
+      return filtered;
+    });
+  };
+
   // To make a list of the items in our inventory file (data.js):
 
   // make an object that contains all the data.js itemNames as keys,
@@ -57,6 +64,22 @@ function App() {
       };
       console.log(newCart);
       return newCart;
+    });
+  };
+
+  const removeOneItemFromCart = (itemName) => {
+    setItemsInCart((prevItemsInCart) => {
+      // We should have a condition for when there is only 1 of that item in the cart.
+
+      if (prevItemsInCart[itemName] < 1) {
+        //
+        //prompt ('are you sure you wish to remove this item from your cart?')
+        //if so, remove from CartSection DOM
+      }
+      const newCart = {
+        ...prevItemsInCart,
+        [itemName]: prevItemsInCart[itemName] - 1,
+      };
     });
   };
 
@@ -104,7 +127,13 @@ function App() {
           />
           <Route
             path="cart"
-            element={<CartSection inCart={inCart} itemsInCart={itemsInCart} />}
+            element={
+              <CartSection
+                inCart={inCart}
+                itemsInCart={itemsInCart}
+                removeFromCartTotally={removeFromCartTotally}
+              />
+            }
           />
 
           <Route path="*" element={<Error />} />

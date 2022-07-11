@@ -11,6 +11,8 @@ const SingleProduct = (props) => {
     <section className="section product">
       <img src={image} alt={name} />
       <h5>{name}</h5>
+      {/* We actually want to display the 'add to cart' button only if the item isn't yet in the cart */}
+      {/* When there is at least 1 of the item in the cart, display instead a counter */}
       <button
         onClick={() => {
           addToCart(product);

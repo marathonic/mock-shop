@@ -1,23 +1,17 @@
 import React from "react";
 import { nanoid } from "nanoid";
 
-// READ NOW!!!! 11 JUL.
-//LET'S ALSO PASS IN
-
-const CartSection = ({ inCart, itemsInCart }) => {
+const CartSection = ({ inCart, itemsInCart, removeFromCartTotally }) => {
+  // Pass a new function from App.js (emptyItemFromCart)
+  // This function will set the state of inCart to a filtered array that doesn't include any objects which contain the property id
   //READ NOW!!! 11 JUL.
   // Let's look at itemsInCart here to display the number of each item in cart.
 
-  // const filteredItems = inCart.filter((item) => inCart.indexOf(item) !== -1);
   //
   //Option 2: make a new Set with no repeated elements (in this case, our item objects)
   const filteredSet = [...new Set(inCart)];
 
   const allItems = filteredSet.map((itemObj) => {
-    //Option 1:
-    // if(inCart doesn't include the current itemObj, return (the below code))
-    // and then after (see CONTINUATION)
-
     return (
       <article className="cart-section-item" key={nanoid()}>
         <img src={itemObj.image} alt={itemObj.name} />
@@ -25,12 +19,13 @@ const CartSection = ({ inCart, itemsInCart }) => {
         <div className="cart-section-details">
           <span className="cart-section-item-name">{itemObj.name}</span>
           <div className="cart-section-quantity">
-            <h5>Quantity:</h5>
-            <h5>{itemsInCart[itemObj.name]}</h5>
+            <h5>Quantity: &nbsp;</h5>
+            <h5> {itemsInCart[itemObj.name]}</h5>
           </div>
+          <button onClick={() => removeFromCartTotally(itemObj.id)}>
+            remove
+          </button>
         </div>
-        {/* CONTINUATION: And here, just get the number of times the itemObj is found inside of allItems */}
-        {/* Once we have stored that number, we can display it in a <span> or whatever, it'll say, for example: 1, or maybe: 4, etc. */}
       </article>
     );
   });
