@@ -42,21 +42,6 @@ function App() {
     console.log(inCart);
   };
 
-  const removeFromCart = (itemId) => {
-    // THIS IS UPDATING THE QUANTITY SPAN. WHY?
-    // I thought we had to use setItemsInCart to change quantity, and if we used setInCart, we'd be setting the objects. hmmmmm
-    setInCart((prevInCart) => {
-      const oldCart = [...prevInCart];
-      const match = oldCart.find((obj) => obj.id === itemId);
-      const indexOfMatch = oldCart.indexOf(match);
-      const newCart = oldCart.splice(indexOfMatch);
-      console.log("should be an array with the match spliced out ");
-      console.log(newCart);
-
-      return newCart;
-    });
-  };
-
   const removeFromCartTotally = (itemId) => {
     setInCart((prevInCart) => {
       const filtered = prevInCart.filter((itemObj) => itemObj.id !== itemId);
@@ -120,6 +105,18 @@ function App() {
 
       return newCart;
     });
+  };
+
+  const removeFromCart = (itemId) => {
+    setInCart((prevInCart) => {
+      const toModify = [...prevInCart];
+      toModify.splice(
+        //<-- this returns the 1 element that matches the condition. The opposite of what we're looking for.
+        prevInCart.indexOf(prevInCart.findIndex((obj) => obj.id === itemId))
+      );
+      return toModify;
+    });
+    // We need to come up with a way to return everything EXCEPT for the 1 that matches the condition.
   };
 
   const resetItemCount = (itemName) => {
