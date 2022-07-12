@@ -8,6 +8,8 @@ const SingleProduct = (props) => {
     addItemToCart,
     removeOneItemFromCart,
     removeFromCart,
+    itemsInCart,
+    removeFromCartTotally,
   } = props;
 
   const { productId } = useParams();
@@ -40,12 +42,14 @@ const SingleProduct = (props) => {
         <div>
           <button
             onClick={() => {
-              removeFromCart(productId);
-              removeOneItemFromCart(name);
+              itemsInCart[name] > 1
+                ? removeOneItemFromCart(name)
+                : removeFromCartTotally(productId);
             }}
           >
             -
           </button>
+          <span>{itemsInCart[name]}</span>
           <button
             onClick={() => {
               addToCart(product);

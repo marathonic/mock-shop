@@ -92,16 +92,18 @@ function App() {
     setItemsInCart((prevItemsInCart) => {
       // We should have a condition for when there is only 1 of that item in the cart.
 
-      if (prevItemsInCart[itemName] === 1) {
-        //prompt ('are you sure you wish to remove this item from your cart?')
-        //if so, remove from CartSection DOM
-        alert("remove this item from cart..."); // <--- hmmm, we may wish to somehow use removeFromCartTotally?
-        return prevItemsInCart;
-      }
+      // if (prevItemsInCart[itemName] === 1) {
+      //   //prompt ('are you sure you wish to remove this item from your cart?')
+      //   //if so, remove from CartSection DOM
+      //   alert("remove this item from cart..."); // <--- hmmm, we may wish to somehow use removeFromCartTotally?
+      //   return prevItemsInCart;
+      // }
       const newCart = {
         ...prevItemsInCart,
         [itemName]: prevItemsInCart[itemName] - 1,
       };
+
+      console.log(newCart);
 
       return newCart;
     });
@@ -112,7 +114,7 @@ function App() {
       const toModify = [...prevInCart];
       toModify.splice(
         //<-- this returns the 1 element that matches the condition. The opposite of what we're looking for.
-        prevInCart.indexOf(prevInCart.findIndex((obj) => obj.id === itemId))
+        toModify.indexOf(toModify.findIndex((obj) => obj.id === itemId))
       );
       return toModify;
     });
@@ -159,7 +161,9 @@ function App() {
                   addToCart={addToCart}
                   addItemToCart={addItemToCart}
                   inCart={inCart}
+                  itemsInCart={itemsInCart}
                   removeOneItemFromCart={removeOneItemFromCart}
+                  removeFromCartTotally={removeFromCartTotally}
                   removeFromCart={removeFromCart}
                 />
               }
