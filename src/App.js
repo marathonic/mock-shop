@@ -42,6 +42,21 @@ function App() {
     console.log(inCart);
   };
 
+  const removeFromCart = (itemId) => {
+    // THIS IS UPDATING THE QUANTITY SPAN. WHY?
+    // I thought we had to use setItemsInCart to change quantity, and if we used setInCart, we'd be setting the objects. hmmmmm
+    setInCart((prevInCart) => {
+      const oldCart = [...prevInCart];
+      const match = oldCart.find((obj) => obj.id === itemId);
+      const indexOfMatch = oldCart.indexOf(match);
+      const newCart = oldCart.splice(indexOfMatch);
+      console.log("should be an array with the match spliced out ");
+      console.log(newCart);
+
+      return newCart;
+    });
+  };
+
   const removeFromCartTotally = (itemId) => {
     setInCart((prevInCart) => {
       const filtered = prevInCart.filter((itemObj) => itemObj.id !== itemId);
@@ -81,19 +96,29 @@ function App() {
     });
   };
 
+  // we have to remove the item from both the inCart and itemsInCart vars.
+  // A better solution would be to commit all changes to inCart,
+  // and the way to get the values in itemsInCart, we'd just map over inCart,
+  // and each time, get a new object with all the 'itemName' keys paired with the respective value.
+  // This also simplifies our 'cart preview (not real name)' functionality,
+  // since we can just display the total from adding all those values together.
   const removeOneItemFromCart = (itemName) => {
+    //this function updates the itemsInCart, where the Quantity spans get their values from.
     setItemsInCart((prevItemsInCart) => {
       // We should have a condition for when there is only 1 of that item in the cart.
 
-      if (prevItemsInCart[itemName] < 1) {
-        //
+      if (prevItemsInCart[itemName] === 1) {
         //prompt ('are you sure you wish to remove this item from your cart?')
         //if so, remove from CartSection DOM
+        alert("remove this item from cart..."); // <--- hmmm, we may wish to somehow use removeFromCartTotally?
+        return prevItemsInCart;
       }
       const newCart = {
         ...prevItemsInCart,
         [itemName]: prevItemsInCart[itemName] - 1,
       };
+
+      return newCart;
     });
   };
 
@@ -136,6 +161,9 @@ function App() {
                 <SingleProduct
                   addToCart={addToCart}
                   addItemToCart={addItemToCart}
+                  inCart={inCart}
+                  removeOneItemFromCart={removeOneItemFromCart}
+                  removeFromCart={removeFromCart}
                 />
               }
             />
@@ -158,6 +186,7 @@ function App() {
                 itemsInCart={itemsInCart}
                 removeFromCartTotally={removeFromCartTotally}
                 resetItemCount={resetItemCount}
+                removeOneItemFromCart={removeOneItemFromCart}
               />
             }
           />

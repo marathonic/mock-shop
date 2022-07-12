@@ -26,6 +26,7 @@ const CartSection = ({
           <div className="cart-section-quantity">
             <h5>Quantity: &nbsp;</h5>
             <h5> {itemsInCart[itemObj.name]}</h5>
+            {/* ^^^ holds a numeric value (how many of this item in cart) */}
           </div>
           <button
             onClick={() => {
@@ -43,6 +44,11 @@ const CartSection = ({
   return (
     <div className="cart-section">
       <div>Cart Section</div>
+      {inCart.length === 0 && (
+        <span>
+          <h5>There are no items in your cart</h5>
+        </span>
+      )}
       <div>{allItems}</div>
     </div>
   );

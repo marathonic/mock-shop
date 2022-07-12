@@ -2,25 +2,60 @@ import { Link, useParams } from "react-router-dom";
 import products from "../data";
 
 const SingleProduct = (props) => {
-  const { addToCart, inCart, addItemToCart } = props;
+  const {
+    addToCart,
+    inCart,
+    addItemToCart,
+    removeOneItemFromCart,
+    removeFromCart,
+  } = props;
 
   const { productId } = useParams();
   const product = products.find((product) => product.id === productId);
   const { image, name } = product;
+  const isAlreadyInCart = () => {
+    // const arr = inCart;
+    return inCart.some((itemObj) => itemObj.id === productId);
+    // console.log(inCart);
+    // return false;
+    // return true; <-- TESTING. Uncomment above to see. We want to figure out why arr.some isn't working, and how to do it instead
+  };
   return (
     <section className="section product">
       <img src={image} alt={name} />
       <h5>{name}</h5>
       {/* We actually want to display the 'add to cart' button only if the item isn't yet in the cart */}
       {/* When there is at least 1 of the item in the cart, display instead a counter */}
-      <button
-        onClick={() => {
-          addToCart(product);
-          addItemToCart(name);
-        }}
-      >
-        add to cart
-      </button>
+      {!isAlreadyInCart() ? (
+        <button
+          onClick={() => {
+            addToCart(product);
+            addItemToCart(name);
+            console.log(productId);
+          }}
+        >
+          add to cart
+        </button>
+      ) : (
+        <div>
+          <button
+            onClick={() => {
+              removeFromCart(productId);
+              removeOneItemFromCart(name);
+            }}
+          >
+            -
+          </button>
+          <button
+            onClick={() => {
+              addToCart(product);
+              addItemToCart(name);
+            }}
+          >
+            +
+          </button>
+        </div>
+      )}
 
       {/* READ NOW!!! 11 JUL. (now doing this above)
       Let's try using addItemToCart here to add the item to our object,
