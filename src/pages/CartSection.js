@@ -1,7 +1,12 @@
 import React from "react";
 import { nanoid } from "nanoid";
 
-const CartSection = ({ inCart, itemsInCart, removeFromCartTotally }) => {
+const CartSection = ({
+  inCart,
+  itemsInCart,
+  removeFromCartTotally,
+  resetItemCount,
+}) => {
   // Pass a new function from App.js (emptyItemFromCart)
   // This function will set the state of inCart to a filtered array that doesn't include any objects which contain the property id
   //READ NOW!!! 11 JUL.
@@ -22,7 +27,12 @@ const CartSection = ({ inCart, itemsInCart, removeFromCartTotally }) => {
             <h5>Quantity: &nbsp;</h5>
             <h5> {itemsInCart[itemObj.name]}</h5>
           </div>
-          <button onClick={() => removeFromCartTotally(itemObj.id)}>
+          <button
+            onClick={() => {
+              removeFromCartTotally(itemObj.id);
+              resetItemCount(itemObj.name);
+            }}
+          >
             remove
           </button>
         </div>

@@ -23,6 +23,20 @@ function App() {
   // (we've seen .add() used to count the number of elements in a Set before.)
   //  we'd just need to figure out how to add the values instead.
   const [itemsInCart, setItemsInCart] = useState({});
+  //We have identified a potential problem:
+  // We're getting our information from 2 places:
+  // inCart: is an array of objects, each object has multiple properties.
+  // itemsInCart: is an object, which holds the item names as keys, and their quantity in cart as the values.
+  // going by React's 'single source of truth' paradigm, shouldn't we get the information from just 1 place?..
+
+  //OK I SEE THE PROBLEM:
+  // What criteria does CartSection take in order to render an item in the DOM?
+  // Answer: That the item appears inside of --inCart--, and that's all
+  // HOWEVER,
+  // itemsInCart, our object that keeps track of quantity, doesn't currently change when we click the remove button
+  // therefore, our -quantity- text span is still showing the previous number
+  // so, we need to also set the item count to 0 when we click the --remove-- button
+
   const addToCart = (item) => {
     setInCart((prevInCart) => [...prevInCart, item]);
     console.log(inCart);
@@ -83,6 +97,17 @@ function App() {
     });
   };
 
+  const resetItemCount = (itemName) => {
+    setItemsInCart((prevItemsInCart) => {
+      const newCart = {
+        ...prevItemsInCart,
+        [itemName]: 0,
+      };
+      console.log(newCart);
+      return newCart;
+    });
+  };
+
   //this may work better: Edit: it doesn't, we wrote exactly what we want!
   // const allTheItemNames = data.map(({name}) => ({name}));
   // console.log(allTheItemNames)
@@ -132,6 +157,7 @@ function App() {
                 inCart={inCart}
                 itemsInCart={itemsInCart}
                 removeFromCartTotally={removeFromCartTotally}
+                resetItemCount={resetItemCount}
               />
             }
           />
