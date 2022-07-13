@@ -24,8 +24,11 @@ const CartSection = ({
         {/* Replace below with anchor tag that links to that product's own page */}
         <div className="cart-section-details">
           <span className="cart-section-item-name">{itemObj.name}</span>
+          <div>
+            <span>${itemObj.price}</span>
+          </div>
           <div className="cart-section-quantity">
-            <h5>Quantity: &nbsp;</h5>
+            <span>Quantity: &nbsp;</span>
             <h5> {itemsInCart[itemObj.name]}</h5>
             {/* ^^^ holds a numeric value (how many of this item in cart) */}
           </div>

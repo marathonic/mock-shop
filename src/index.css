@@ -294,6 +294,9 @@ ul {
 .active {
   color: var(--primary-500);
 }
+
+
+
 .products article {
   margin-bottom: 1rem;
 }
@@ -308,6 +311,23 @@ ul {
 }
 
 /* my own styling */
+
+.header {
+  width: 100%;
+}
+
+.logo-container{
+  display: flex;
+  justify-content: center;
+  text-decoration: none;
+}
+
+.logo {
+  font-family: 'Yellowtail-Regular';
+  cursor: pointer;
+  max-width: max-content;
+  color: darkred;
+}
 
 .container {
   margin: 1rem;
@@ -370,15 +390,24 @@ ul {
   display:flex;
 }
 
+.item-thumbnail {
+  min-height: 6rem;
+    max-height: 11rem;
+}
 
 @font-face {
   font-family: Questrial-Regular;
   src: url('./fonts/Questrial-Regular.ttf') format('truetype');
 }
 
+@font-face {
+  font-family: Yellowtail-Regular;
+  src: url('./fonts/Yellowtail-Regular.ttf') format('truetype');
+}
+
 @media only screen and (max-width: 600px) {
   .navbar {
-    position: absolute;
+    position: fixed;
     justify-content: space-around;
     max-width: 90%;
     bottom: 0;
@@ -397,4 +426,59 @@ ul {
   .nav-about {
     display: none;
   }
+
+
+  .products {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .products article {
+    margin-bottom: 0.5rem;
+  }
+
+  .product-container {
+    display: flex;
+    background-color: whitesmoke;
+
+  }
+
+
+  .item-thumbnail {
+    min-width: 8rem;
+    max-width: 8rem;
+    min-height: 8rem;
+      max-height: 8rem;
+  }
+
+  .preview-right {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding-left: 0.79rem;
+  }
+
+hr.product-separator {
+  border: solid white 2px;
+}
+
+.circle {
+  position: absolute;
+  width: 1.5rem;
+  height: 1.5rem;
+  margin-top: 0.2rem;
+  border-radius: 50%;
+  background-color: palegoldenrod;
+}
+
+.cart-preview-count {
+  position: absolute;
+  margin-top: -0.12rem;
+  font-size: 1.2rem;
+}
+
+
+
+
 }

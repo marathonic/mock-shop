@@ -144,7 +144,7 @@ function App() {
     <BrowserRouter>
       <div className="container">
         <Routes>
-          <Route path="/" element={<SharedLayout />}>
+          <Route path="/" element={<SharedLayout itemsInCart={itemsInCart} />}>
             <Route index element={<Home />} />
             <Route path="about" element={<About />} />
 
