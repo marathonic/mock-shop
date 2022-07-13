@@ -142,65 +142,67 @@ function App() {
 
   return (
     <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<SharedLayout />}>
-          <Route index element={<Home />} />
-          <Route path="about" element={<About />} />
-
-          <Route
-            path="products"
-            element={
-              <SharedProductsLayout
-                numberOfItems={inCart.length}
-                inCart={inCart}
-                itemsInCart={itemsInCart}
-              />
-            }
-          >
-            <Route index element={<Products />} />
+      <div className="container">
+        <Routes>
+          <Route path="/" element={<SharedLayout />}>
+            <Route index element={<Home />} />
+            <Route path="about" element={<About />} />
 
             <Route
-              path=":productId"
+              path="products"
               element={
-                <SingleProduct
-                  addToCart={addToCart}
-                  addItemToCart={addItemToCart}
+                <SharedProductsLayout
+                  numberOfItems={inCart.length}
                   inCart={inCart}
                   itemsInCart={itemsInCart}
-                  removeOneItemFromCart={removeOneItemFromCart}
+                />
+              }
+            >
+              <Route index element={<Products />} />
+
+              <Route
+                path=":productId"
+                element={
+                  <SingleProduct
+                    addToCart={addToCart}
+                    addItemToCart={addItemToCart}
+                    inCart={inCart}
+                    itemsInCart={itemsInCart}
+                    removeOneItemFromCart={removeOneItemFromCart}
+                    removeFromCartTotally={removeFromCartTotally}
+                    removeFromCart={removeFromCart}
+                    resetItemCount={resetItemCount}
+                  />
+                }
+              />
+            </Route>
+
+            <Route path="login" element={<Login setUser={setUser}></Login>} />
+            <Route
+              path="dashboard"
+              element={
+                <ProtectedRoute user={user}>
+                  <Dashboard user={user} />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="cart"
+              element={
+                <CartSection
+                  inCart={inCart}
+                  itemsInCart={itemsInCart}
                   removeFromCartTotally={removeFromCartTotally}
-                  removeFromCart={removeFromCart}
                   resetItemCount={resetItemCount}
+                  removeOneItemFromCart={removeOneItemFromCart}
                 />
               }
             />
+
+            <Route path="*" element={<Error />} />
           </Route>
-
-          <Route path="login" element={<Login setUser={setUser}></Login>} />
-          <Route
-            path="dashboard"
-            element={
-              <ProtectedRoute user={user}>
-                <Dashboard user={user} />
-              </ProtectedRoute>
-            }
-          />
-          <Route
-            path="cart"
-            element={
-              <CartSection
-                inCart={inCart}
-                itemsInCart={itemsInCart}
-                removeFromCartTotally={removeFromCartTotally}
-                resetItemCount={resetItemCount}
-                removeOneItemFromCart={removeOneItemFromCart}
-              />
-            }
-          />
-
-          <Route path="*" element={<Error />} />
-        </Route>
-      </Routes>
+        </Routes>
+      </div>
     </BrowserRouter>
   );
 }
