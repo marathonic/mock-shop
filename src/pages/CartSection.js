@@ -14,9 +14,10 @@ const CartSection = ({
 
   //
   //Option 2: make a new Set with no repeated elements (in this case, our item objects)
-  const filteredSet = [...new Set(inCart)];
+  const noEmptyQty = inCart.filter((item) => itemsInCart[item.name] >= 1);
+  const noRepeats = [...new Set(noEmptyQty)];
 
-  const allItems = filteredSet.map((itemObj) => {
+  const allItems = noRepeats.map((itemObj) => {
     return (
       <article className="cart-section-item" key={nanoid()}>
         <img src={itemObj.image} alt={itemObj.name} />

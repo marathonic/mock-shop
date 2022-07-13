@@ -10,6 +10,7 @@ const SingleProduct = (props) => {
     removeFromCart,
     itemsInCart,
     removeFromCartTotally,
+    resetItemCount,
   } = props;
 
   const { productId } = useParams();
@@ -17,7 +18,9 @@ const SingleProduct = (props) => {
   const { image, name } = product;
   const isAlreadyInCart = () => {
     // const arr = inCart;
+    return itemsInCart[name] > 0;
     return inCart.some((itemObj) => itemObj.id === productId);
+
     // console.log(inCart);
     // return false;
     // return true; <-- TESTING. Uncomment above to see. We want to figure out why arr.some isn't working, and how to do it instead
@@ -44,7 +47,8 @@ const SingleProduct = (props) => {
             onClick={() => {
               itemsInCart[name] > 1
                 ? removeOneItemFromCart(name)
-                : removeFromCartTotally(productId);
+                : resetItemCount(name);
+              // removeFromCartTotally(productId);
             }}
           >
             -

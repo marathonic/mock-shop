@@ -1,11 +1,11 @@
 import { Outlet } from "react-router-dom";
 import Cart from "../components/Cart";
 
-const SharedProductsLayout = ({ numberOfItems }) => {
+const SharedProductsLayout = ({ numberOfItems, itemsInCart }) => {
   return (
     <>
       <h2>Products</h2>
-      <Cart numberOfItems={numberOfItems} />
+      <Cart numberOfItems={numberOfItems} itemsInCart={itemsInCart} />
 
       <Outlet />
     </>

@@ -69,6 +69,10 @@ function App() {
     setItemsInCart(getListOfItems());
   }, []);
 
+  //Let's try this:
+  // Any time itemCount changes, we'll check if there's any item objects --inCart-- with names that have 0 items in --itemsInCart--
+  // If so, we'll filter those objects from the inCart array.
+
   //
   const addItemToCart = (itemName) => {
     setItemsInCart((prevItemsInCart) => {
@@ -149,6 +153,7 @@ function App() {
               <SharedProductsLayout
                 numberOfItems={inCart.length}
                 inCart={inCart}
+                itemsInCart={itemsInCart}
               />
             }
           >
@@ -165,6 +170,7 @@ function App() {
                   removeOneItemFromCart={removeOneItemFromCart}
                   removeFromCartTotally={removeFromCartTotally}
                   removeFromCart={removeFromCart}
+                  resetItemCount={resetItemCount}
                 />
               }
             />
