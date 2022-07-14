@@ -3,12 +3,19 @@ import getSeason from "../components/helper-functions/getSeason";
 
 function Home() {
   let season = getSeason();
+  let bannerName = `/${season}-banner.jpg`;
 
   return (
     <>
-      <section className="section">
+      <section className="section home">
         <h1>Home</h1>
+        <img
+          src={process.env.PUBLIC_URL + bannerName}
+          alt={`${season} sale banner`}
+          className="welcome-banner"
+        />
         <div className="welcome-banner">{season} sale live now!</div>
+        <div className="welcome-banner"></div>
         <hr className="horizontal-line" />
         <div className="best-sellers">
           <span className="subsection">Best sellers</span>

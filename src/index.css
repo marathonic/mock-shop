@@ -71,6 +71,8 @@ body {
   font-weight: 400;
   line-height: 1.75;
   color: var(--textColor);
+  margin: 0;
+  padding: 0;
 }
 
 p {
@@ -334,6 +336,13 @@ ul {
   text-align: center;
 }
 
+img.welcome-banner {
+  margin: 0;
+  padding: 0;
+  max-width: 92%;
+  max-height: 42%;
+}
+
 .horizontal-line {
   width: 70%;
 }
@@ -394,6 +403,8 @@ ul {
   min-height: 6rem;
     max-height: 11rem;
 }
+
+/* my own rules */
 
 @font-face {
   font-family: Questrial-Regular;
@@ -465,20 +476,41 @@ hr.product-separator {
 
 .circle {
   position: absolute;
-  width: 1.5rem;
-  height: 1.5rem;
+  width: 1.36rem;
+  height: 1.36rem;
   margin-top: 0.2rem;
   border-radius: 50%;
   background-color: palegoldenrod;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.circle-big {
+  position: absolute;
+  width: 1.6rem;
+  height: 1.6rem;
+  margin-top: 0.2rem;
+  border-radius: 50%;
+  background-color: palegoldenrod;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  padding: 1rem;
 }
 
 .cart-preview-count {
   position: absolute;
   margin-top: -0.12rem;
-  font-size: 1.2rem;
+  font-size: 1rem;
 }
 
+.invisible {
+  display: none
+}
 
-
+section.home {
+  padding: 0;
+}
 
 }

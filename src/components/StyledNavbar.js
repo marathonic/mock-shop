@@ -11,7 +11,7 @@ import {
 
 const StyledNavbar = ({ itemsInCart }) => {
   const countAllItems = (obj) => Object.values(obj).reduce((a, b) => a + b, 0);
-
+  const numberOfItemsInCart = countAllItems(itemsInCart);
   return (
     <div className="navbar">
       <NavLink
@@ -68,10 +68,15 @@ const StyledNavbar = ({ itemsInCart }) => {
           <span className="nav-text">Cart</span>
           <span className="nav-icon">
             <FaShoppingCart />
-            <span className="circle">&nbsp;</span>
-            <span className="cart-preview-count">
-              {countAllItems(itemsInCart)}
-            </span>
+            {numberOfItemsInCart > 0 && (
+              <span
+                className={numberOfItemsInCart < 100 ? "circle" : "circle-big"}
+              >
+                <span className="cart-preview-count">
+                  {numberOfItemsInCart}
+                </span>
+              </span>
+            )}
           </span>
         </span>
       </NavLink>
