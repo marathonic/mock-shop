@@ -119,7 +119,7 @@ function App() {
     };
 
     return (
-      <div>
+      <div className="counter-container">
         <button
           className="counter-btn"
           onClick={() => {
