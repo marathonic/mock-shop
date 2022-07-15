@@ -414,6 +414,7 @@ section.product button {
 }
 
 
+
 .cart-section-item img {
   max-width: 7rem;
 }
@@ -430,7 +431,6 @@ section.product button {
 }
 
 .cart-section-quantity {
-  display:flex;
 }
 
 .item-thumbnail {
@@ -447,6 +447,17 @@ section.product button {
   letter-spacing: var(--letterSpacing);
   padding: 0.375rem 0.75rem;
   display: inline-block;
+}
+
+.quantity-container {
+  display: flex;
+}
+
+.qty {
+  font-size: 0.7rem;
+  position: absolute;
+  margin-left: 8%;
+  margin-top: 2%;
 }
 
 /* my own rules */
@@ -594,10 +605,17 @@ section.product button {
   transform: scale(0.95);
 }
 
-.cart-counter-container {
+
+.cart-section-details {
   width: 100%;
-  display: flex;
-  flex-direction: row;
+}
+
+.quantity-container span:nth-of-type(2) {
+  width: 100%;
+}
+
+.counter-container {
+  width: 100%;
 }
 
 }

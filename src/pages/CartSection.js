@@ -35,8 +35,10 @@ const CartSection = ({
             <span>${itemObj.price}</span>
           </div>
           <div className="cart-section-quantity">
-            <span>Quantity: &nbsp;</span>
-            {ItemCounter(itemObj.name, itemObj)}
+            <div className="quantity-container">
+              <span className="qty">QTY:</span>
+              <span>{ItemCounter(itemObj.name, itemObj)}</span>
+            </div>
             {/* <h5> {itemsInCart[itemObj.name]}</h5> */}
             {/* ^^^ holds a numeric value (how many of this item in cart) */}
           </div>
