@@ -13,6 +13,7 @@ import SharedProductsLayout from "./pages/SharedProductsLayout";
 import Cart from "./components/Cart";
 import CartSection from "./pages/CartSection";
 import data from "./data";
+import { FaPlus, FaMinus } from "react-icons/fa";
 
 function App() {
   const [user, setUser] = useState(null);
@@ -49,10 +50,6 @@ function App() {
     });
   };
 
-  // To make a list of the items in our inventory file (data.js):
-
-  // make an object that contains all the data.js itemNames as keys,
-  // and sets them to 0 by default, like {itemOne: 0, itemTwo: 0, itemThree: 0, etc...}
   const getListOfItems = () => {
     let allItemNames = {};
     for (let i = 0; i < data.length; i++) {
@@ -69,11 +66,9 @@ function App() {
     setItemsInCart(getListOfItems());
   }, []);
 
-  //Let's try this:
   // Any time itemCount changes, we'll check if there's any item objects --inCart-- with names that have 0 items in --itemsInCart--
   // If so, we'll filter those objects from the inCart array.
 
-  //
   const addItemToCart = (itemName) => {
     setItemsInCart((prevItemsInCart) => {
       const newCart = {
@@ -96,12 +91,6 @@ function App() {
     setItemsInCart((prevItemsInCart) => {
       // We should have a condition for when there is only 1 of that item in the cart.
 
-      // if (prevItemsInCart[itemName] === 1) {
-      //   //prompt ('are you sure you wish to remove this item from your cart?')
-      //   //if so, remove from CartSection DOM
-      //   alert("remove this item from cart..."); // <--- hmmm, we may wish to somehow use removeFromCartTotally?
-      //   return prevItemsInCart;
-      // }
       const newCart = {
         ...prevItemsInCart,
         [itemName]: prevItemsInCart[itemName] - 1,
@@ -117,13 +106,43 @@ function App() {
     setInCart((prevInCart) => {
       const toModify = [...prevInCart];
       toModify.splice(
-        //<-- this returns the 1 element that matches the condition. The opposite of what we're looking for.
         toModify.indexOf(toModify.findIndex((obj) => obj.id === itemId))
       );
       return toModify;
     });
-    // We need to come up with a way to return everything EXCEPT for the 1 that matches the condition.
   };
+
+  function ItemCounter(itemName, itemObj) {
+    const btnStyle = {
+      pointerEvents: "none",
+      color: "palevioletred",
+    };
+
+    return (
+      <div>
+        <button
+          className="counter-btn"
+          onClick={() => {
+            itemsInCart[itemName] > 1
+              ? removeOneItemFromCart(itemName)
+              : resetItemCount(itemName);
+          }}
+        >
+          <FaMinus style={btnStyle} />
+        </button>
+        <span className="add-item-counter">{itemsInCart[itemName]}</span>
+        <button
+          className="counter-btn"
+          onClick={() => {
+            addToCart(itemObj);
+            addItemToCart(itemName);
+          }}
+        >
+          <FaPlus style={btnStyle} />
+        </button>
+      </div>
+    );
+  }
 
   const resetItemCount = (itemName) => {
     setItemsInCart((prevItemsInCart) => {
@@ -135,10 +154,6 @@ function App() {
       return newCart;
     });
   };
-
-  //this may work better: Edit: it doesn't, we wrote exactly what we want!
-  // const allTheItemNames = data.map(({name}) => ({name}));
-  // console.log(allTheItemNames)
 
   return (
     <BrowserRouter>
@@ -172,6 +187,7 @@ function App() {
                     removeFromCartTotally={removeFromCartTotally}
                     removeFromCart={removeFromCart}
                     resetItemCount={resetItemCount}
+                    ItemCounter={ItemCounter}
                   />
                 }
               />
@@ -195,6 +211,7 @@ function App() {
                   removeFromCartTotally={removeFromCartTotally}
                   resetItemCount={resetItemCount}
                   removeOneItemFromCart={removeOneItemFromCart}
+                  ItemCounter={ItemCounter}
                 />
               }
             />

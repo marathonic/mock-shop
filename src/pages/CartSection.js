@@ -8,6 +8,7 @@ const CartSection = ({
   itemsInCart,
   removeFromCartTotally,
   resetItemCount,
+  ItemCounter,
 }) => {
   // Pass a new function from App.js (emptyItemFromCart)
   // This function will set the state of inCart to a filtered array that doesn't include any objects which contain the property id
@@ -35,7 +36,8 @@ const CartSection = ({
           </div>
           <div className="cart-section-quantity">
             <span>Quantity: &nbsp;</span>
-            <h5> {itemsInCart[itemObj.name]}</h5>
+            {ItemCounter(itemObj.name, itemObj)}
+            {/* <h5> {itemsInCart[itemObj.name]}</h5> */}
             {/* ^^^ holds a numeric value (how many of this item in cart) */}
           </div>
           <button

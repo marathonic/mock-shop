@@ -12,6 +12,7 @@ const SingleProduct = (props) => {
     itemsInCart,
     removeFromCartTotally,
     resetItemCount,
+    ItemCounter,
   } = props;
 
   const { productId } = useParams();
@@ -27,38 +28,6 @@ const SingleProduct = (props) => {
     // return true; <-- TESTING. Uncomment above to see. We want to figure out why arr.some isn't working, and how to do it instead
   };
 
-  function ItemCounter() {
-    return (
-      <div>
-        <button
-          className="counter-btn"
-          onClick={() => {
-            itemsInCart[name] > 1
-              ? removeOneItemFromCart(name)
-              : resetItemCount(name);
-            // removeFromCartTotally(productId);
-          }}
-        >
-          <FaMinus style={btnStyle} />
-        </button>
-        <span className="add-item-counter">{itemsInCart[name]}</span>
-        <button
-          className="counter-btn"
-          onClick={() => {
-            addToCart(product);
-            addItemToCart(name);
-          }}
-        >
-          <FaPlus style={btnStyle} />
-        </button>
-      </div>
-    );
-  }
-
-  const btnStyle = {
-    pointerEvents: "none",
-    color: "palevioletred",
-  };
   return (
     <section className="section product">
       <img src={image} alt={name} />
@@ -83,7 +52,7 @@ const SingleProduct = (props) => {
           </button>
         </div>
       ) : (
-        ItemCounter()
+        ItemCounter(name, product)
         // ^^^ All we did here was put all the code that was here into the ItemCounter function.
         // It works the same, but if we want to place the code here instead, simply copy and paste it here,
         // starting right after the return statement in the ItemCounter functional component.
