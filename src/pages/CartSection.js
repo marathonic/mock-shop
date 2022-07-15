@@ -31,14 +31,12 @@ const CartSection = ({
         {/* Replace below with anchor tag that links to that product's own page */}
         <div className="cart-section-details">
           <span className="cart-section-item-name">{itemObj.name}</span>
-          <div>
-            <span>${itemObj.price}</span>
+          <div className="cart-price-div">
+            <span className="cart-price-span">${itemObj.price}</span>
           </div>
           <div className="cart-section-quantity">
-            <div className="quantity-container">
-              <span className="qty">QTY:</span>
-              <span>{ItemCounter(itemObj.name, itemObj)}</span>
-            </div>
+            <span className="qty">QTY:</span>
+            <span>{ItemCounter(itemObj.name, itemObj)}</span>
             {/* <h5> {itemsInCart[itemObj.name]}</h5> */}
             {/* ^^^ holds a numeric value (how many of this item in cart) */}
           </div>
@@ -50,6 +48,7 @@ const CartSection = ({
             }}
           >
             remove
+            <div className="triangle"></div>
           </button>
         </div>
       </article>
@@ -68,7 +67,7 @@ const CartSection = ({
           <h5 style={{ color: "silver" }}>0 items in cart</h5>
         </span>
       )}
-      <div>{allItems}</div>
+      <div className="cart-list-overview">{allItems}</div>
     </div>
   );
 };
