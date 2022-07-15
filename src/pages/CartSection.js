@@ -1,6 +1,7 @@
 import React from "react";
 import { nanoid } from "nanoid";
 import { IoCartOutline } from "react-icons/io5";
+import countAllItems from "../components/helper-functions/countAllItems";
 
 const CartSection = ({
   inCart,
@@ -21,7 +22,11 @@ const CartSection = ({
   const allItems = noRepeats.map((itemObj) => {
     return (
       <article className="cart-section-item" key={nanoid()}>
-        <img src={itemObj.image} alt={itemObj.name} />
+        <img
+          src={itemObj.image}
+          alt={itemObj.name}
+          className="item-thumbnail"
+        />
         {/* Replace below with anchor tag that links to that product's own page */}
         <div className="cart-section-details">
           <span className="cart-section-item-name">{itemObj.name}</span>
@@ -49,14 +54,14 @@ const CartSection = ({
 
   return (
     <div className="cart-section">
-      {itemsInCart > 0 && <div>Your Cart</div>}
+      {countAllItems(itemsInCart) > 0 && <h5>Your Cart</h5>}
       {inCart.length === 0 && (
         <span>
-          <h5>There are no items in your cart</h5>
           <IoCartOutline
             size={120}
             style={{ color: "rgba(217, 217, 214, 0.6)" }}
           />
+          <h5 style={{ color: "silver" }}>0 items in cart</h5>
         </span>
       )}
       <div>{allItems}</div>

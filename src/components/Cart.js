@@ -1,8 +1,7 @@
 import React from "react";
+import countAllItems from "./helper-functions/countAllItems";
 
 const Cart = ({ numberOfItems, itemsInCart }) => {
-  const countAllItems = (obj) => Object.values(obj).reduce((a, b) => a + b, 0);
-
   return (
     <div className="cart-preview-corner">
       <span>Cart</span>
