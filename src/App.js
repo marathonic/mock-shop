@@ -54,7 +54,7 @@ function App() {
     let allItemNames = {};
     for (let i = 0; i < data.length; i++) {
       let currentObj = data[i];
-      allItemNames[currentObj.name] = 0;
+      allItemNames[currentObj.name] = 0; //<-- initialise all itemsInCart at 0
     }
     console.log(allItemNames);
     return allItemNames;
