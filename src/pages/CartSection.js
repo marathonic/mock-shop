@@ -1,5 +1,6 @@
 import React from "react";
 import { nanoid } from "nanoid";
+import { IoCartOutline } from "react-icons/io5";
 
 const CartSection = ({
   inCart,
@@ -33,6 +34,7 @@ const CartSection = ({
             {/* ^^^ holds a numeric value (how many of this item in cart) */}
           </div>
           <button
+            className="remove-item-btn"
             onClick={() => {
               removeFromCartTotally(itemObj.id);
               resetItemCount(itemObj.name);
@@ -47,10 +49,14 @@ const CartSection = ({
 
   return (
     <div className="cart-section">
-      <div>Cart Section</div>
+      {itemsInCart > 0 && <div>Your Cart</div>}
       {inCart.length === 0 && (
         <span>
           <h5>There are no items in your cart</h5>
+          <IoCartOutline
+            size={120}
+            style={{ color: "rgba(217, 217, 214, 0.6)" }}
+          />
         </span>
       )}
       <div>{allItems}</div>

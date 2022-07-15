@@ -1,4 +1,5 @@
 import { Link, useParams } from "react-router-dom";
+import { FaPlus, FaMinus } from "react-icons/fa";
 import products from "../data";
 
 const SingleProduct = (props) => {
@@ -25,6 +26,11 @@ const SingleProduct = (props) => {
     // return false;
     // return true; <-- TESTING. Uncomment above to see. We want to figure out why arr.some isn't working, and how to do it instead
   };
+
+  const btnStyle = {
+    pointerEvents: "none",
+    color: "palevioletred",
+  };
   return (
     <section className="section product">
       <img src={image} alt={name} />
@@ -32,18 +38,22 @@ const SingleProduct = (props) => {
       {/* We actually want to display the 'add to cart' button only if the item isn't yet in the cart */}
       {/* When there is at least 1 of the item in the cart, display instead a counter */}
       {!isAlreadyInCart() ? (
-        <button
-          onClick={() => {
-            addToCart(product);
-            addItemToCart(name);
-            console.log(productId);
-          }}
-        >
-          add to cart
-        </button>
+        <div>
+          <button
+            className="add-cart-btn"
+            onClick={() => {
+              addToCart(product);
+              addItemToCart(name);
+              console.log(productId);
+            }}
+          >
+            add to cart
+          </button>
+        </div>
       ) : (
         <div>
           <button
+            className="counter-btn"
             onClick={() => {
               itemsInCart[name] > 1
                 ? removeOneItemFromCart(name)
@@ -51,16 +61,17 @@ const SingleProduct = (props) => {
               // removeFromCartTotally(productId);
             }}
           >
-            -
+            <FaMinus style={btnStyle} />
           </button>
-          <span>{itemsInCart[name]}</span>
+          <span className="add-item-counter">{itemsInCart[name]}</span>
           <button
+            className="counter-btn"
             onClick={() => {
               addToCart(product);
               addItemToCart(name);
             }}
           >
-            +
+            <FaPlus style={btnStyle} />
           </button>
         </div>
       )}
