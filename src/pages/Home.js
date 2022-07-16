@@ -1,7 +1,7 @@
 import React from "react";
 import getSeason from "../components/helper-functions/getSeason";
 
-function Home() {
+function Home({ user }) {
   let season = getSeason();
   let bannerName = `/${season}-banner.jpg`;
 
@@ -9,6 +9,7 @@ function Home() {
     <>
       <section className="section home">
         <h1>Home</h1>
+        {user && <h4>Welcome back, {user.name}!</h4>}
         <img
           src={process.env.PUBLIC_URL + bannerName}
           alt={`${season} sale banner`}

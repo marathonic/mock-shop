@@ -1,11 +1,22 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-const Login = ({ setUser }) => {
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-
+const Login = ({ user, setUser }) => {
   const navigate = useNavigate();
+
+  //the following useEffect may be unnecessary now that we've fixed the styling from
+  //within StyledNavbar (sharedLayout --> StyledNavbar, passing the user, line 53 in StyledNavbar)
+
+  useEffect(() => {
+    if (user) {
+      navigate("/dashboard");
+    }
+  }, [navigate, user]);
+
+  // ^read above. Do not remove the next code.
+
+  const [name, setName] = useState(user.name || "");
+  const [email, setEmail] = useState(user.email || "");
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -17,10 +28,10 @@ const Login = ({ setUser }) => {
   return (
     <section className="section">
       <form className="form" onSubmit={handleSubmit}>
-        <h5>login</h5>
+        <h5>log in</h5>
         <div className="form-row">
           <label htmlFor="name" className="form-label">
-            name
+            Hogworse's student ID
           </label>
           <input
             type="text"
@@ -32,7 +43,7 @@ const Login = ({ setUser }) => {
         </div>
         <div className="form-row">
           <label htmlFor="email" className="form-label">
-            email
+            Secret phrase
           </label>
           <input
             type="email"
@@ -43,7 +54,7 @@ const Login = ({ setUser }) => {
           />
         </div>
         <button type="submit" className="btn btn-block">
-          login
+          Enter
         </button>
       </form>
     </section>

@@ -16,14 +16,20 @@ import data from "./data";
 import { FaPlus, FaMinus } from "react-icons/fa";
 
 function App() {
-  const [user, setUser] = useState(null);
+  const [user, setUser] = useState(
+    JSON.parse(localStorage.getItem("user")) || null
+  );
   const [cart, setCart] = useState(false);
   const [inCart, setInCart] = useState([]); //may be redundant, because:
+  const [userName, setUserName] = useState("");
+  const [userEmail, setUserEmail] = useState("");
   //we could just look at our object below, make a Set from it,
   // then use the built-in .add() function to add all the VALUES
   // (we've seen .add() used to count the number of elements in a Set before.)
   //  we'd just need to figure out how to add the values instead.
+
   const [itemsInCart, setItemsInCart] = useState({});
+
   //We have identified a potential problem:
   // We're getting our information from 2 places:
   // inCart: is an array of objects, each object has multiple properties.
@@ -65,6 +71,25 @@ function App() {
   useEffect(() => {
     setItemsInCart(getListOfItems());
   }, []);
+
+  //set the default user state to the logged in user
+
+  useEffect(() => {
+    localStorage.setItem("user", JSON.stringify(user));
+  }, [user]);
+
+  // retrive objects from localStorage
+
+  //user object
+
+  useEffect(() => {
+    const user = JSON.parse(localStorage.getItem("user"));
+    if (user) {
+      setUser(user);
+    }
+  }, []);
+
+  //
 
   // Any time itemCount changes, we'll check if there's any item objects --inCart-- with names that have 0 items in --itemsInCart--
   // If so, we'll filter those objects from the inCart array.
@@ -159,8 +184,11 @@ function App() {
     <BrowserRouter>
       <div className="container">
         <Routes>
-          <Route path="/" element={<SharedLayout itemsInCart={itemsInCart} />}>
-            <Route index element={<Home />} />
+          <Route
+            path="/"
+            element={<SharedLayout itemsInCart={itemsInCart} user={user} />}
+          >
+            <Route index element={<Home user={user} />} />
             <Route path="about" element={<About />} />
 
             <Route
@@ -193,7 +221,10 @@ function App() {
               />
             </Route>
 
-            <Route path="login" element={<Login setUser={setUser}></Login>} />
+            <Route
+              path="login"
+              element={<Login user={user} setUser={setUser}></Login>}
+            />
             <Route
               path="dashboard"
               element={

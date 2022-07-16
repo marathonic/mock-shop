@@ -4,11 +4,11 @@ import Header from "../components/Header";
 import Navbar from "../components/Navbar";
 import StyledNavbar from "../components/StyledNavbar";
 
-const SharedLayout = ({ numberOfItems, itemsInCart }) => {
+const SharedLayout = ({ numberOfItems, itemsInCart, user }) => {
   return (
     <>
       <Header />
-      <StyledNavbar itemsInCart={itemsInCart} />
+      <StyledNavbar itemsInCart={itemsInCart} user={user} />
       <Outlet />
     </>
   );

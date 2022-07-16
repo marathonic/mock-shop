@@ -142,6 +142,7 @@ ul {
   cursor: pointer;
   color: var(--white);
   background: var(--primary-500);
+  background: lightseagreen;
   border: transparent;
   border-radius: var(--borderRadius);
   letter-spacing: var(--letterSpacing);
