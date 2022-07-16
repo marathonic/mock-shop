@@ -1,9 +1,19 @@
 import { FaRegUserCircle } from "react-icons/fa";
 
 const Dashboard = ({ user }) => {
+  const styles = {
+    display: "flex",
+    flexDirection: "column",
+    width: "auto",
+    alignItems: "center",
+  };
   return (
-    <section className="section">
-      <FaRegUserCircle size={42} color={"gray"} />
+    <section className="section" style={styles}>
+      <FaRegUserCircle
+        size={42}
+        color={"gray"}
+        style={{ marginBottom: "1rem" }}
+      />
       <h5 style={{ color: "darkgray" }}>You're logged in as {user?.name}</h5>
       <p>Thank you for shopping with us.</p>
       <p>
@@ -12,8 +22,11 @@ const Dashboard = ({ user }) => {
         provide some ID, and your login details to verify your identity.{" "}
       </p>
       <p>Thank you for your understanding.</p>
-      <p style={{ textDecoration: "underline" }}>Hogworse students:</p> You may
-      be asked to provide proof of ID for joint record-keeping with the school.
+      <span style={{ textDecoration: "underline" }}>Hogworse students:</span>
+      <span>
+        You may be asked to provide proof of ID for joint record-keeping with
+        the school.
+      </span>
       <hr />
       <h4>Yer a wizard, {user?.name}</h4>
       <button style={{ marginBlock: "2rem" }} className="btn">

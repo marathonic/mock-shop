@@ -15,8 +15,8 @@ const Login = ({ user, setUser }) => {
 
   // ^read above. Do not remove the next code.
 
-  const [name, setName] = useState(user.name || "");
-  const [email, setEmail] = useState(user.email || "");
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
 
   const handleSubmit = async (e) => {
     e.preventDefault();
