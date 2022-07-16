@@ -413,6 +413,11 @@ section.product button {
   margin-inline: 3%;
 }
 
+.counter-btn:hover,
+.add-cart-btn:hover {
+  background-color: pink;
+}
+
 .cart-preview-corner {
 }
 
@@ -644,6 +649,7 @@ section.product button {
   transform: scale(0.85);
   box-shadow: 3px 2px 25px 1px rgba(141, 111, 239, 0.25);
 }
+
 
 .counter-btn:active {
   /* background-color: #ead101; */
