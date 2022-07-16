@@ -1,5 +1,6 @@
 import { Link, useParams } from "react-router-dom";
-import { FaPlus, FaMinus } from "react-icons/fa";
+import MediaQuery from "react-responsive";
+import { FaPlus, FaMinus, FaArrowCircleLeft } from "react-icons/fa";
 import products from "../data";
 
 const SingleProduct = (props) => {
@@ -18,6 +19,13 @@ const SingleProduct = (props) => {
   const { productId } = useParams();
   const product = products.find((product) => product.id === productId);
   const { image, name, price, description } = product;
+
+  const backToProducts = {
+    position: "absolute",
+    top: "30%",
+    alignItems: "stretch",
+  };
+
   const isAlreadyInCart = () => {
     // const arr = inCart;
     return itemsInCart[name] > 0;
@@ -73,7 +81,20 @@ const SingleProduct = (props) => {
         run increaseQuantity instead of addToCart
 }} */}
 
-      <Link to="/products">back to products</Link>
+      <MediaQuery query="(min-width: 1024px)">
+        <Link to="/products">
+          <div style={backToProducts}>
+            <FaArrowCircleLeft
+              style={{
+                position: "absolute",
+                marginTop: "7px",
+                marginLeft: "-11px",
+              }}
+            />
+            &nbsp; Back to products
+          </div>
+        </Link>
+      </MediaQuery>
     </section>
   );
 };
