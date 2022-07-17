@@ -26,6 +26,18 @@ const SingleProduct = (props) => {
     alignItems: "stretch",
   };
 
+  const desktopArrow = {
+    position: "absolute",
+    marginTop: "7px",
+    marginLeft: "-11px",
+  };
+
+  const mobileArrow = {
+    position: "relative",
+    marginTop: 0,
+    marginLeft: 0,
+  };
+
   const isAlreadyInCart = () => {
     // const arr = inCart;
     return itemsInCart[name] > 0;
@@ -39,9 +51,16 @@ const SingleProduct = (props) => {
   return (
     <section className="section product">
       <img src={image} alt={name} />
-      <h5>{name}</h5>
-      <p>${price}</p>
-      <div>
+      <div
+        style={{
+          width: "100%",
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+        }}
+      >
+        <h5>{name}</h5>
+        <span>${price}</span>
         <p>{description}</p>
       </div>
       {/* We actually want to display the 'add to cart' button only if the item isn't yet in the cart */}
@@ -81,20 +100,20 @@ const SingleProduct = (props) => {
         run increaseQuantity instead of addToCart
 }} */}
 
-      <MediaQuery query="(min-width: 1024px)">
-        <Link to="/products">
-          <div style={backToProducts}>
-            <FaArrowCircleLeft
-              style={{
-                position: "absolute",
-                marginTop: "7px",
-                marginLeft: "-11px",
-              }}
-            />
-            &nbsp; Back to products
-          </div>
-        </Link>
-      </MediaQuery>
+      {/* <MediaQuery query="(min-width: 1024px)"> */}
+      <Link to="/products">
+        <div style={backToProducts}>
+          <FaArrowCircleLeft
+            style={{
+              position: "absolute",
+              marginTop: "7px",
+              marginLeft: "-11px",
+            }}
+          />
+          &nbsp; Back
+        </div>
+      </Link>
+      {/* </MediaQuery> */}
     </section>
   );
 };
