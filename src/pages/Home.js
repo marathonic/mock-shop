@@ -1,21 +1,14 @@
 import React from "react";
 import getSeason from "../components/helper-functions/getSeason";
 
-function Home({ user }) {
-  let season = getSeason();
-  let bannerName = `/${season}-banner.jpg`;
-
+function Home({ user, banner }) {
   return (
     <>
       <section className="section home">
         <h1>Home</h1>
         {user && <h4>Welcome back, {user.name}!</h4>}
-        <img
-          src={process.env.PUBLIC_URL + bannerName}
-          alt={`${season} sale banner`}
-          className="welcome-banner"
-        />
-        <div className="welcome-banner">{season} sale live now!</div>
+        {banner}
+        <div className="welcome-banner">sale live now!</div>
         <div className="welcome-banner"></div>
         <hr className="horizontal-line" />
         <div className="best-sellers">

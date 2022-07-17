@@ -344,7 +344,11 @@ ul {
 
 .cart-section-details > button {
   margin-left: -20%;
-  z-index: -1;
+  z-index: 1;
+}
+
+.cart-section-item > img {
+  z-index: 2;
 }
 
 .cart-list-overview {

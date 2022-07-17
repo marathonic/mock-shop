@@ -15,6 +15,7 @@ import CartSection from "./pages/CartSection";
 import data from "./data";
 import { FaPlus, FaMinus } from "react-icons/fa";
 import { FcCancel } from "react-icons/fc";
+import getSeason from "./components/helper-functions/getSeason";
 
 function App() {
   const [user, setUser] = useState(
@@ -22,6 +23,7 @@ function App() {
   );
   const [cart, setCart] = useState(false);
   const [inCart, setInCart] = useState([]); //may be redundant, because:
+  const [banner, setBanner] = useState("");
   const [userName, setUserName] = useState("");
   const [userEmail, setUserEmail] = useState("");
   //we could just look at our object below, make a Set from it,
@@ -44,6 +46,19 @@ function App() {
   // itemsInCart, our object that keeps track of quantity, doesn't currently change when we click the remove button
   // therefore, our -quantity- text span is still showing the previous number
   // so, we need to also set the item count to 0 when we click the --remove-- button
+  useEffect(() => {
+    setBanner(() => {
+      let season = getSeason();
+      let bannerName = `/${season}-banner.jpg`;
+      return (
+        <img
+          src={process.env.PUBLIC_URL + bannerName}
+          alt={`${season} sale banner`}
+          className="welcome-banner"
+        />
+      );
+    });
+  }, []);
 
   const logOut = () => setUser(null);
 
@@ -206,7 +221,7 @@ function App() {
             path="/"
             element={<SharedLayout itemsInCart={itemsInCart} user={user} />}
           >
-            <Route index element={<Home user={user} />} />
+            <Route index element={<Home user={user} banner={banner} />} />
             <Route path="about" element={<About />} />
 
             <Route
