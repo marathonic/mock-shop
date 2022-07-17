@@ -41,7 +41,7 @@ const SingleProduct = (props) => {
   const isAlreadyInCart = () => {
     // const arr = inCart;
     return itemsInCart[name] > 0;
-    return inCart.some((itemObj) => itemObj.id === productId);
+    // return inCart.some((itemObj) => itemObj.id === productId);
 
     // console.log(inCart);
     // return false;
@@ -60,7 +60,7 @@ const SingleProduct = (props) => {
         }}
       >
         <h5>{name}</h5>
-        <span>${price}</span>
+        <span>${price.toLocaleString("en-US")}</span>
         <p>{description}</p>
       </div>
       {/* We actually want to display the 'add to cart' button only if the item isn't yet in the cart */}

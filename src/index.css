@@ -448,6 +448,14 @@ section.product button {
   background-color: pink;
 }
 
+
+.counter-btn {
+  background-color: pink;
+  border: transparent;
+}
+
+
+
 .cart-preview-corner {
 }
 

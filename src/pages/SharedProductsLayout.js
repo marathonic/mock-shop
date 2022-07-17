@@ -5,7 +5,9 @@ const SharedProductsLayout = ({ numberOfItems, itemsInCart }) => {
   const location = useLocation();
   return (
     <>
-      {location.pathname === "/products" && <h4>Shop All</h4>}
+      {location.pathname === "/products" && (
+        <h4 style={{ marginBlock: "2%" }}>Shop All</h4>
+      )}
       <Cart numberOfItems={numberOfItems} itemsInCart={itemsInCart} />
 
       <Outlet />

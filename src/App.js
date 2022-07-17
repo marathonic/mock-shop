@@ -14,6 +14,7 @@ import Cart from "./components/Cart";
 import CartSection from "./pages/CartSection";
 import data from "./data";
 import { FaPlus, FaMinus } from "react-icons/fa";
+import { FcCancel } from "react-icons/fc";
 
 function App() {
   const [user, setUser] = useState(
@@ -158,15 +159,30 @@ function App() {
           <FaMinus style={btnStyle} />
         </button>
         <span className="add-item-counter">{itemsInCart[itemName]}</span>
-        <button
-          className="counter-btn"
-          onClick={() => {
-            addToCart(itemObj);
-            addItemToCart(itemName);
-          }}
-        >
-          <FaPlus style={btnStyle} />
-        </button>
+        {itemsInCart[itemName] < itemObj.available ? (
+          <button
+            className="counter-btn"
+            onClick={() => {
+              addToCart(itemObj);
+              addItemToCart(itemName);
+            }}
+          >
+            <FaPlus style={btnStyle} />
+          </button>
+        ) : (
+          <button>
+            <FcCancel />
+            <span
+              style={{
+                position: "absolute",
+                bottom: "5",
+                right: "42%",
+              }}
+            >
+              limit: {itemObj.available}
+            </span>
+          </button>
+        )}
       </div>
     );
   }

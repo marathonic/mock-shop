@@ -64,7 +64,9 @@ const CartSection = ({
         <div className="cart-section-details">
           <span className="cart-section-item-name">{itemObj.name}</span>
           <div className="cart-price-div">
-            <span className="cart-price-span">${itemObj.price}</span>
+            <span className="cart-price-span">
+              ${itemObj.price.toLocaleString("en-US")}
+            </span>
           </div>
           <div className="cart-section-quantity">
             <span className="qty">QTY:</span>
