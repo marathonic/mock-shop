@@ -149,7 +149,6 @@ ul {
   padding: 0.375rem 0.75rem;
   box-shadow: var(--shadow-1);
   transition: var(--transition);
-  text-transform: capitalize;
   display: inline-block;
 }
 .btn:hover {

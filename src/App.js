@@ -44,6 +44,8 @@ function App() {
   // therefore, our -quantity- text span is still showing the previous number
   // so, we need to also set the item count to 0 when we click the --remove-- button
 
+  const logOut = () => setUser(null);
+
   const addToCart = (item) => {
     setInCart((prevInCart) => [...prevInCart, item]);
     console.log(inCart);
@@ -229,7 +231,7 @@ function App() {
               path="dashboard"
               element={
                 <ProtectedRoute user={user}>
-                  <Dashboard user={user} />
+                  <Dashboard user={user} logOut={logOut} />
                 </ProtectedRoute>
               }
             />
@@ -243,6 +245,7 @@ function App() {
                   resetItemCount={resetItemCount}
                   removeOneItemFromCart={removeOneItemFromCart}
                   ItemCounter={ItemCounter}
+                  user={user}
                 />
               }
             />

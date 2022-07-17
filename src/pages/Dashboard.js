@@ -1,6 +1,6 @@
 import { FaRegUserCircle } from "react-icons/fa";
 
-const Dashboard = ({ user }) => {
+const Dashboard = ({ user, logOut }) => {
   const styles = {
     display: "flex",
     flexDirection: "column",
@@ -29,7 +29,8 @@ const Dashboard = ({ user }) => {
       </span>
       <hr />
       <h4>Yer a wizard, {user?.name}</h4>
-      <button style={{ marginBlock: "2rem" }} className="btn">
+      <hr className="horizontal-line" />
+      <button onClick={logOut} style={{ marginBlock: "2rem" }} className="btn">
         Log out
       </button>
     </section>

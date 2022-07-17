@@ -1,4 +1,5 @@
 import React from "react";
+import { Link, useNavigate } from "react-router-dom";
 import { nanoid } from "nanoid";
 import { IoCartOutline } from "react-icons/io5";
 import countAllItems from "../components/helper-functions/countAllItems";
@@ -9,6 +10,7 @@ const CartSection = ({
   removeFromCartTotally,
   resetItemCount,
   ItemCounter,
+  user,
 }) => {
   // Pass a new function from App.js (emptyItemFromCart)
   // This function will set the state of inCart to a filtered array that doesn't include any objects which contain the property id
@@ -20,6 +22,36 @@ const CartSection = ({
   const noEmptyQty = inCart.filter((item) => itemsInCart[item.name] >= 1);
   const noRepeats = [...new Set(noEmptyQty)];
   const totalItemCount = countAllItems(itemsInCart);
+  const LoginBtn = ({ user }) => {
+    if (!user && totalItemCount > 0) {
+      return (
+        <Link to="/login">
+          <button className="btn">Log in to continue</button>
+        </Link>
+      );
+    } else if (user && totalItemCount > 0) {
+      return (
+        <div
+          style={{ width: "100%", display: "flex", justifyContent: "center" }}
+        >
+          <button
+            className="btn"
+            style={{ width: "max-content", textAlign: "center" }}
+            onClick={() =>
+              window.open(
+                "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+                "_blank"
+              )
+            }
+          >
+            Proceed to checkout
+          </button>
+        </div>
+      );
+    } else {
+      return null;
+    }
+  };
   const allItems = noRepeats.map((itemObj) => {
     return (
       <article className="cart-section-item" key={nanoid()}>
@@ -57,7 +89,7 @@ const CartSection = ({
 
   return (
     <div className="cart-section">
-      {totalItemCount > 0 && <h5>Your Cart</h5>}
+      {totalItemCount > 0 && <h5 style={{ textAlign: "center" }}>Your Cart</h5>}
       {totalItemCount === 0 && (
         <span>
           <IoCartOutline
@@ -68,6 +100,9 @@ const CartSection = ({
         </span>
       )}
       <div className="cart-list-overview">{allItems}</div>
+      {/* if !user, show the following button. */}
+      {/* {!user && <Link to="/login">please log in </Link>} */}
+      <LoginBtn user={user} />
     </div>
   );
 };

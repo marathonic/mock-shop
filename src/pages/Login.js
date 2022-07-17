@@ -25,8 +25,15 @@ const Login = ({ user, setUser }) => {
     navigate("/dashboard");
   };
 
+  const styles = {
+    display: "flex",
+    flexDirection: "column",
+    width: "auto",
+    alignItems: "center",
+  };
+
   return (
-    <section className="section">
+    <section className="section" style={styles}>
       <form className="form" onSubmit={handleSubmit}>
         <h5>log in</h5>
         <div className="form-row">
