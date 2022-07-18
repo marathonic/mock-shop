@@ -100,7 +100,7 @@ const CartSection = ({
           </div>
           <div className="cart-section-quantity">
             <span className="qty">QTY:</span>
-            <span>{ItemCounter(itemObj.name, itemObj)}</span>
+            <span>{ItemCounter(itemObj.name, itemObj, itemObj.id)}</span>
             {/* <h5> {itemsInCart[itemObj.name]}</h5> */}
             {/* ^^^ holds a numeric value (how many of this item in cart) */}
           </div>
@@ -108,7 +108,7 @@ const CartSection = ({
             className="remove-item-btn"
             onClick={() => {
               removeFromCartTotally(itemObj.id);
-              resetItemCount(itemObj.name);
+              resetItemCount(itemObj.name, itemObj.id);
             }}
           >
             remove

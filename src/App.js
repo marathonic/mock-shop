@@ -176,7 +176,7 @@ function App() {
           onClick={() => {
             itemsInCart[itemName] > 1
               ? removeOneItemFromCart(itemName, itemId)
-              : resetItemCount(itemName);
+              : resetItemCount(itemName, itemId);
           }}
         >
           <FaMinus style={btnStyle} />
@@ -210,7 +210,13 @@ function App() {
     );
   }
 
-  const resetItemCount = (itemName) => {
+  const resetItemCount = (itemName, itemId) => {
+    // I FIGURED OUT WHAT'S GOING ON,
+    // Why when we reduce an item to 0, and then add 1 of it, our total says we have 2 of it. This is why:
+    // It's because we have a condition on our onClick for the MINUS button, and this is what it does:
+    // When the item count is more than 1, and we subtract 1 item, we're updating BOTH the object and the count.
+    // BUT THEN, when the count is 1, our other condition triggers, which is updating ONLY the count object!
+    // THE SOLUTION? WE NEED TO ALSO EDIT THE OBJECT IN OUR SECOND ( : ) CONDITION, WHEN THE COUNT IS 1.
     setItemsInCart((prevItemsInCart) => {
       const newCart = {
         ...prevItemsInCart,
@@ -218,6 +224,14 @@ function App() {
       };
       console.log(newCart);
       return newCart;
+    });
+
+    setInCart((prevInCart) => {
+      const toModify = [...prevInCart];
+      toModify.splice(
+        toModify.indexOf(toModify.findIndex((obj) => obj.id === itemId))
+      );
+      return toModify;
     });
   };
 
