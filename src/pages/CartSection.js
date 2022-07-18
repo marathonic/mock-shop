@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { nanoid } from "nanoid";
 import { IoCartOutline } from "react-icons/io5";
@@ -19,20 +19,38 @@ const CartSection = ({
 
   //
   //Option 2: make a new Set with no repeated elements (in this case, our item objects)
+  const [orderTally, setOrderTally] = React.useState(0);
+
   const noEmptyQty = inCart.filter((item) => itemsInCart[item.name] >= 1);
   const noRepeats = [...new Set(noEmptyQty)];
-  console.log("NEXT LINE IS noRepeats");
-  console.log(noRepeats);
+  console.log("NEXT LINE IS noEmptyQty");
+  console.log(noEmptyQty);
   const totalItemCount = countAllItems(itemsInCart);
 
+  // Maybe try a useEffect?
+
   const getOrderTotal = () => {
-    let orderTotal = 0;
-    for (let i = 0; i < noEmptyQty.length; i++) {
-      let current = noEmptyQty[i];
-      orderTotal += current.price;
-    }
-    return orderTotal;
+    setOrderTally((prevTally) => {
+      // let orderTotal = prevTally;
+      const orderTotal = noEmptyQty.reduce(
+        (total, obj) => obj.price + total,
+        0
+      );
+      // const orderTotal = Object.keys(noEmptyQty).reduce(function(previous, key) {
+      //   return previous + noEmptyQty[key].value
+      // })
+      //let orderTotal = reduce all the values in noEmpty
+      // for (let i = 0; i < noEmptyQty.length; i++) {
+      //   let current = noEmptyQty[i];
+      //   orderTotal += current.price;
+      // }
+      return orderTotal;
+    });
   };
+
+  useEffect(() => {
+    getOrderTotal();
+  });
 
   const LoginBtn = ({ user }) => {
     if (!user && totalItemCount > 0) {
@@ -117,7 +135,8 @@ const CartSection = ({
       {/* if !user, show the following button. */}
       {/* {!user && <Link to="/login">please log in </Link>} */}
       <LoginBtn user={user} />
-      <span>Your total: {getOrderTotal().toLocaleString("en-US")}</span>
+      {/* <span>Your total: {getOrderTotal().toLocaleString("en-US")}</span> */}
+      <span>Your total: {orderTally}</span>
     </div>
   );
 };
