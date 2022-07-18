@@ -21,7 +21,14 @@ const CartSection = ({
   //Option 2: make a new Set with no repeated elements (in this case, our item objects)
   const noEmptyQty = inCart.filter((item) => itemsInCart[item.name] >= 1);
   const noRepeats = [...new Set(noEmptyQty)];
+  console.log("NEXT LINE IS noEmptyQty");
+  console.log(noEmptyQty);
   const totalItemCount = countAllItems(itemsInCart);
+
+  const addAllPrices = () => {
+    // We can just use noEmptyQty, without using noRepeats, and just add the price value of each object in the array!
+  };
+
   const LoginBtn = ({ user }) => {
     if (!user && totalItemCount > 0) {
       return (
