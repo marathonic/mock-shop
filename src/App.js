@@ -129,7 +129,7 @@ function App() {
   // and each time, get a new object with all the 'itemName' keys paired with the respective value.
   // This also simplifies our 'cart preview (not real name)' functionality,
   // since we can just display the total from adding all those values together.
-  const removeOneItemFromCart = (itemName) => {
+  const removeOneItemFromCart = (itemName, itemId) => {
     //this function updates the itemsInCart, where the Quantity spans get their values from.
     setItemsInCart((prevItemsInCart) => {
       // We should have a condition for when there is only 1 of that item in the cart.
@@ -143,6 +143,14 @@ function App() {
 
       return newCart;
     });
+
+    setInCart((prevInCart) => {
+      const toModify = [...prevInCart];
+      toModify.splice(
+        toModify.indexOf(toModify.findIndex((obj) => obj.id === itemId))
+      );
+      return toModify;
+    });
   };
 
   const removeFromCart = (itemId) => {
@@ -155,7 +163,7 @@ function App() {
     });
   };
 
-  function ItemCounter(itemName, itemObj) {
+  function ItemCounter(itemName, itemObj, itemId) {
     const btnStyle = {
       pointerEvents: "none",
       color: "palevioletred",
@@ -167,7 +175,7 @@ function App() {
           className="counter-btn"
           onClick={() => {
             itemsInCart[itemName] > 1
-              ? removeOneItemFromCart(itemName)
+              ? removeOneItemFromCart(itemName, itemId)
               : resetItemCount(itemName);
           }}
         >

@@ -79,7 +79,7 @@ const SingleProduct = (props) => {
           </button>
         </div>
       ) : (
-        ItemCounter(name, product)
+        ItemCounter(name, product, productId)
         // ^^^ All we did here was put all the code that was here into the ItemCounter function.
         // It works the same, but if we want to place the code here instead, simply copy and paste it here,
         // starting right after the return statement in the ItemCounter functional component.
