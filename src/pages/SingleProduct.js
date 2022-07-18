@@ -50,7 +50,7 @@ const SingleProduct = (props) => {
 
   return (
     <section className="section product">
-      <img src={image} alt={name} />
+      <img src={image} alt={name} style={{ maxWidth: "50%" }} />
       <div
         style={{
           width: "100%",

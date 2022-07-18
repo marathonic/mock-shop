@@ -437,6 +437,11 @@ section.product button {
   filter: brightness(1.03) opacity(0.93);
 }
 
+
+.preview-right > h5 {
+  font-size: 110%;
+}
+
 .add-cart-btn {
   color: palevioletred;
   font-weight: bold;
@@ -516,6 +521,7 @@ section.product button {
 .item-thumbnail {
   min-height: 6rem;
     max-height: 11rem;
+    background-color: white;
 }
 
 .remove-item-btn {
@@ -618,6 +624,7 @@ section.product button {
     padding-left: 0.79rem;
   }
 
+
 hr.product-separator {
   border: solid white 2px;
 }
@@ -671,6 +678,13 @@ section.product button {
   width: 200px;
   height: 150px;
 }
+
+/* How to get big images to not show up super huge ? */
+/* .section.product > img {
+  max-width: 33%;
+  max-height: 33%;
+} */
+
 
 .add-cart-btn {
   width: 47%;

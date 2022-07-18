@@ -44,6 +44,39 @@ const products = [
     image:
       "https://dl.airtable.com/.attachmentThumbnails/a6119fabf7256049cc0e8dbcdf536c9c/b0153f66",
   },
+  {
+    id: "raco3qNyHJGHLVi9l",
+    name: "Ember Phoenix Wand",
+    price: 3864,
+    available: 10,
+    description: "Crafted from the ashes of a Phoenix. Maker unknown",
+    image: "../wand.jpg",
+  },
+  {
+    id: "Ve5aqLyhXGLHJi2y",
+    name: "veritaserum",
+    price: 142000,
+    available: 10,
+    description: "A small vial of Veritaserum. Good for one use.",
+    image: "../veritaserum.jpg",
+  },
+  {
+    id: "Ra3mqi5zHgLcUi2y",
+    name: "nimbus 2000",
+    price: 70000,
+    available: 6,
+    description: "The fastest racing broom there is",
+    image: "../nimbus.jpg",
+  },
+  {
+    id: "Ea4oNc3zHgLcUi2y",
+    name: "Technical cloak",
+    price: 10000,
+    available: 6,
+    description:
+      "From the Timeless collection, by famed designer Zoolandalf. One size to fit them all. Woven from 100% Sumerian wool. Smells rank tho.",
+    image: "../cloak.png",
+  },
 ];
 
 export default products;
