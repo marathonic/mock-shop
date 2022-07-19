@@ -48,15 +48,15 @@ const products = [
   {
     id: "Ve5aqLyhXGLHJi2y",
     name: "veritaserum",
-    price: 142000,
+    price: 6400,
     available: 10,
     description: "A small vial of Veritaserum. Good for one use.",
     image: "../veritaserum.jpg",
   },
   {
     id: "Ra3mqi5zHgLcUi2y",
-    name: "nimbus 2000",
-    price: 70000,
+    name: "Nobushi 2000",
+    price: 5000,
     available: 6,
     description: "The fastest racing broom there is",
     image: "../nimbus.jpg",
@@ -64,7 +64,7 @@ const products = [
   {
     id: "Ea4oNc3zHgLcUi2y",
     name: "Technical cloak",
-    price: 10000,
+    price: 100,
     available: 6,
     description:
       "From the Timeless collection, by famed designer Gandalarmani. One size to fit them all. Woven from 100% Sumerian wool.",
@@ -73,7 +73,7 @@ const products = [
   {
     id: "h0gWaH1sTgLcUi2y",
     name: "Hogwarts: A History",
-    price: 7,
+    price: 3.5,
     available: 27,
     description:
       "A very informative book about the history of a certain school of witchcraft and wizardry.",
@@ -91,7 +91,7 @@ const products = [
   {
     id: "raco3qNyHJGHLVi9l",
     name: "Ember Phoenix Wand",
-    price: 3864,
+    price: 3200,
     available: 10,
     description: "Crafted from the ashes of a Phoenix. Maker unknown",
     image: "../wand.jpg",

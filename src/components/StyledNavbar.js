@@ -9,9 +9,7 @@ import {
   FaShoppingCart,
 } from "react-icons/fa";
 
-const StyledNavbar = ({ itemsInCart, user }) => {
-  const countAllItems = (obj) => Object.values(obj).reduce((a, b) => a + b, 0);
-  const numberOfItemsInCart = countAllItems(itemsInCart);
+const StyledNavbar = ({ itemsInCart, user, numberOfItemsInCart }) => {
   return (
     <div className="navbar">
       <NavLink

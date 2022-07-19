@@ -12,6 +12,7 @@ const CartSection = ({
   resetItemCount,
   ItemCounter,
   user,
+  orderTally,
 }) => {
   // Pass a new function from App.js (emptyItemFromCart)
   // This function will set the state of inCart to a filtered array that doesn't include any objects which contain the property id
@@ -20,7 +21,6 @@ const CartSection = ({
 
   //
   //Option 2: make a new Set with no repeated elements (in this case, our item objects)
-  const [orderTally, setOrderTally] = React.useState(0);
   const [conversionDisplay, setConversionDisplay] = React.useState(false);
   const noEmptyQty = inCart.filter((item) => itemsInCart[item.name] >= 1);
   const noRepeats = [...new Set(noEmptyQty)];
@@ -29,29 +29,6 @@ const CartSection = ({
   const totalItemCount = countAllItems(itemsInCart);
 
   // Maybe try a useEffect?
-
-  const getOrderTotal = () => {
-    setOrderTally((prevTally) => {
-      // let orderTotal = prevTally;
-      const orderTotal = noEmptyQty.reduce(
-        (total, obj) => obj.price + total,
-        0
-      );
-      // const orderTotal = Object.keys(noEmptyQty).reduce(function(previous, key) {
-      //   return previous + noEmptyQty[key].value
-      // })
-      //let orderTotal = reduce all the values in noEmpty
-      // for (let i = 0; i < noEmptyQty.length; i++) {
-      //   let current = noEmptyQty[i];
-      //   orderTotal += current.price;
-      // }
-      return orderTotal;
-    });
-  };
-
-  useEffect(() => {
-    getOrderTotal();
-  });
 
   const LoginBtn = ({ user }) => {
     if (!user && totalItemCount > 0) {
@@ -108,8 +85,8 @@ const CartSection = ({
           <button
             className="remove-item-btn"
             onClick={() => {
-              removeFromCartTotally(itemObj.id);
               resetItemCount(itemObj.name, itemObj.id);
+              removeFromCartTotally(itemObj.id);
             }}
           >
             remove
