@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { nanoid } from "nanoid";
 import { IoCartOutline } from "react-icons/io5";
+import { FaInfoCircle } from "react-icons/fa";
 import countAllItems from "../components/helper-functions/countAllItems";
 
 const CartSection = ({
@@ -20,7 +21,7 @@ const CartSection = ({
   //
   //Option 2: make a new Set with no repeated elements (in this case, our item objects)
   const [orderTally, setOrderTally] = React.useState(0);
-
+  const [conversionDisplay, setConversionDisplay] = React.useState(false);
   const noEmptyQty = inCart.filter((item) => itemsInCart[item.name] >= 1);
   const noRepeats = [...new Set(noEmptyQty)];
   console.log("NEXT LINE IS noEmptyQty");
@@ -95,7 +96,7 @@ const CartSection = ({
           <span className="cart-section-item-name">{itemObj.name}</span>
           <div className="cart-price-div">
             <span className="cart-price-span">
-              ${itemObj.price.toLocaleString("en-US")}
+              {itemObj.price.toLocaleString("en-US")} ʛ
             </span>
           </div>
           <div className="cart-section-quantity">
@@ -120,7 +121,7 @@ const CartSection = ({
   });
 
   return (
-    <div className="cart-section">
+    <div className="cart-section" style={{ marginBottom: "20%" }}>
       {totalItemCount > 0 && <h5 style={{ textAlign: "center" }}>Your Cart</h5>}
       {totalItemCount === 0 && (
         <span>
@@ -134,9 +135,31 @@ const CartSection = ({
       <div className="cart-list-overview">{allItems}</div>
       {/* if !user, show the following button. */}
       {/* {!user && <Link to="/login">please log in </Link>} */}
-      <LoginBtn user={user} />
       {/* <span>Your total: {getOrderTotal().toLocaleString("en-US")}</span> */}
-      <span>Your total: {orderTally}</span>
+      {totalItemCount > 0 && (
+        <span style={{ fontSize: "1.32rem" }}>
+          Your total: {orderTally.toLocaleString("en-US")} ʛ.
+          <button
+            onClick={() => setConversionDisplay(!conversionDisplay)}
+            style={{ border: "none", backgroundColor: "transparent" }}
+          >
+            <FaInfoCircle
+              style={{ pointerEvents: "none", color: "skyblue" }}
+              size={17}
+            />
+          </button>
+          {conversionDisplay && (
+            <span style={{ fontSize: "0.9rem", color: "darkgray" }}>
+              <div>
+                <span>In Muggle currency:</span>
+              </div>
+              <div>£{(orderTally * 4.93).toLocaleString("en-US")}</div>
+              <div>${(orderTally * 6.64).toLocaleString("en-US")}</div>
+            </span>
+          )}
+        </span>
+      )}
+      <LoginBtn user={user} />
     </div>
   );
 };

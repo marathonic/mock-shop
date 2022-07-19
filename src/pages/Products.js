@@ -17,7 +17,7 @@ const Products = () => {
                 />
                 <div className="preview-right">
                   <h5>{product.name}</h5>
-                  <span>${product.price.toLocaleString("en-US")}</span>
+                  <span>{product.price.toLocaleString("en-US")} ʛ</span>
                   {/* read more */}
                 </div>
                 {/* <MediaQuery query="(max-width: 600px)">
