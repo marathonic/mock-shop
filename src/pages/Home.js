@@ -14,6 +14,10 @@ function Home({ user, banner }) {
         <div className="best-sellers">
           <span className="subsection">Best sellers</span>
           <ul className="best-sellers-list">
+            {/* <------------------ CONTINUE HERE!!!--------------------------->
+            Now all we need to do is 2 things:
+            X) Link to some random items in our Home screen
+            Y) Make each item in CartSection --Link-- to its own SingleProductPage */}
             <li>Potion</li>
             <li>Book</li>
             <li>Wand</li>
