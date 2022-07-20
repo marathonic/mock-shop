@@ -30,14 +30,19 @@ const CartSection = ({
   useEffect(() => {
     const updateCost = () => {
       setCost(() => {
-        const arrayed = [...Object.values(itemsInCart)];
+        const arrayedAmounts = [...Object.values(itemsInCart)];
         const prices = [];
         for (let i = 0; i < products.length; i++) {
           const current = products[i];
           prices.push(current.price);
         }
-        console.log(arrayed);
+        const multiplied = [];
+        for (let i = 0; i < arrayedAmounts.length; i++) {
+          multiplied.push(prices[i] * arrayedAmounts[i]);
+        }
+        console.log(arrayedAmounts);
         console.log(prices);
+        console.log(multiplied);
         return;
       });
     };
