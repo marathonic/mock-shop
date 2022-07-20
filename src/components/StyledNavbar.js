@@ -8,8 +8,10 @@ import {
   FaUser,
   FaShoppingCart,
 } from "react-icons/fa";
+import countAllItems from "./helper-functions/countAllItems";
 
-const StyledNavbar = ({ itemsInCart, user, numberOfItemsInCart }) => {
+const StyledNavbar = ({ itemsInCart, user, inTheBag }) => {
+  const totalItemCount = countAllItems(itemsInCart);
   return (
     <div className="navbar">
       <NavLink
@@ -66,13 +68,9 @@ const StyledNavbar = ({ itemsInCart, user, numberOfItemsInCart }) => {
           <span className="nav-text">Cart</span>
           <span className="nav-icon">
             <FaShoppingCart />
-            {numberOfItemsInCart > 0 && (
-              <span
-                className={numberOfItemsInCart < 100 ? "circle" : "circle-big"}
-              >
-                <span className="cart-preview-count">
-                  {numberOfItemsInCart}
-                </span>
+            {totalItemCount > 0 && (
+              <span className={totalItemCount < 100 ? "circle" : "circle-big"}>
+                <span className="cart-preview-count">{totalItemCount}</span>
               </span>
             )}
           </span>
