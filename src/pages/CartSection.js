@@ -3,6 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { nanoid } from "nanoid";
 import { IoCartOutline } from "react-icons/io5";
 import countAllItems from "../components/helper-functions/countAllItems";
+import products from "../data";
 
 const CartSection = ({
   inCart,
@@ -29,36 +30,20 @@ const CartSection = ({
   useEffect(() => {
     const updateCost = () => {
       setCost(() => {
-        const arrayedQuantities = [];
-        for (let qty of Object.values(itemsInCart)) {
-          if (qty > 0) {
-            arrayedQuantities.unshift(qty);
-          }
+        const arrayed = [...Object.values(itemsInCart)];
+        const prices = [];
+        for (let i = 0; i < products.length; i++) {
+          const current = products[i];
+          prices.push(current.price);
         }
-
-        console.log("arrayedQuantities below");
-        console.log(arrayedQuantities);
-
-        const priceTags = [];
-        for (let i = 0; i < noRepeats.length; i++) {
-          priceTags.push(noRepeats[i].price);
-        }
-        // ^the price tags for this loop are locked in safely in their own array.
-        const multipliedPrices = [];
-        for (let i = 0; i < priceTags.length; i++) {
-          multipliedPrices.push(arrayedQuantities[i] * priceTags[i]);
-        }
-        // multipliedPrices.push(priceTags[i] * arrayedQuantities[i]);
-        console.log(priceTags);
-        console.log(multipliedPrices);
-        //^^^next, just reduce multipliedPrices and return that value. We have our value to display!
-        return multipliedPrices;
-        // next, the quantities.
+        console.log(arrayed);
+        console.log(prices);
+        return;
       });
     };
 
     updateCost();
-  }, [itemsInCart]);
+  }, [itemsInCart, noRepeats]);
 
   // Maybe try a useEffect?
 
