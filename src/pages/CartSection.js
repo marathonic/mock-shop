@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { nanoid } from "nanoid";
 import { IoCartOutline } from "react-icons/io5";
@@ -19,36 +19,50 @@ const CartSection = ({
 
   //
   //Option 2: make a new Set with no repeated elements (in this case, our item objects)
-  const [orderTally, setOrderTally] = React.useState(0);
 
   const noEmptyQty = inCart.filter((item) => itemsInCart[item.name] >= 1);
   const noRepeats = [...new Set(noEmptyQty)];
   const totalItemCount = countAllItems(itemsInCart);
 
-  // Maybe try a useEffect?
-
-  const getOrderTotal = () => {
-    setOrderTally((prevTally) => {
-      // let orderTotal = prevTally;
-      const orderTotal = noEmptyQty.reduce(
-        (total, obj) => obj.price + total,
-        0
-      );
-      // const orderTotal = Object.keys(noEmptyQty).reduce(function(previous, key) {
-      //   return previous + noEmptyQty[key].value
-      // })
-      //let orderTotal = reduce all the values in noEmpty
-      // for (let i = 0; i < noEmptyQty.length; i++) {
-      //   let current = noEmptyQty[i];
-      //   orderTotal += current.price;
-      // }
-      return orderTotal;
-    });
-  };
+  const [cost, setCost] = useState(0);
 
   useEffect(() => {
-    getOrderTotal();
-  });
+    const updateCost = () => {
+      setCost(() => {
+        //we logged to console both noRepeats and itemsInCart from here, succesfully. Values were up to date.
+        const itemsBeingBought = [];
+        for (let nameOfItem of Object.keys(itemsInCart)) {
+          // if (itemsInCart[nameOfItem] > 0) {
+          //   itemsBeingBought.push(nameOfItem);
+          // }
+          //actually, we need all indexes, so that we can match each index here to the other array.
+          itemsBeingBought.push(nameOfItem); // <--- but isn't this the same as noRepeats?
+        }
+        console.log(itemsBeingBought);
+        //Success. Now we get the price of each item.
+        const costsOfMatchingItems = noRepeats.filter((obj) =>
+          itemsBeingBought.includes(obj.name)
+        );
+        console.log(costsOfMatchingItems);
+        //Success. Now we have to get the values to multiply:
+        const quantityOfItemsBeingBought = [];
+        for (let nameOfItem of Object.keys(itemsInCart)) {
+          if (itemsInCart[nameOfItem] > 0) {
+            quantityOfItemsBeingBought.push(itemsInCart[nameOfItem]);
+          }
+        }
+        console.log(quantityOfItemsBeingBought);
+
+        //WHAT THE FUCK..........
+        // I think this may be wrong. redo the whole thing.
+        // }
+      });
+    };
+
+    updateCost();
+  }, [itemsInCart]);
+
+  // Maybe try a useEffect?
 
   const LoginBtn = ({ user }) => {
     if (!user && totalItemCount > 0) {
@@ -134,7 +148,7 @@ const CartSection = ({
       {/* {!user && <Link to="/login">please log in </Link>} */}
       <LoginBtn user={user} />
       {/* <span>Your total: {getOrderTotal().toLocaleString("en-US")}</span> */}
-      <span>Your total: {orderTally}</span>
+      <span>Your total: {}</span>
     </div>
   );
 };
