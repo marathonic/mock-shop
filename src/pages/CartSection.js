@@ -88,14 +88,18 @@ const CartSection = ({
   const allItems = noRepeats.map((itemObj) => {
     return (
       <article className="cart-section-item" key={nanoid()}>
-        <img
-          src={itemObj.image}
-          alt={itemObj.name}
-          className="item-thumbnail"
-        />
+        <Link to={`/products/${itemObj.id}`}>
+          <img
+            src={itemObj.image}
+            alt={itemObj.name}
+            className="item-thumbnail"
+          />
+        </Link>
         {/* Replace below with anchor tag that links to that product's own page */}
         <div className="cart-section-details">
-          <span className="cart-section-item-name">{itemObj.name}</span>
+          <Link to={`/products/${itemObj.id}`}>
+            <span className="cart-section-item-name">{itemObj.name}</span>
+          </Link>
           <div className="cart-price-div">
             <span className="cart-price-span">
               {itemObj.price.toLocaleString("en-US")} ʛ
