@@ -73,7 +73,7 @@ const products = [
   {
     id: "h0gWaH1sTgLcUi2y",
     name: "Hogwarts: A History",
-    price: 3.5,
+    price: 3,
     available: 27,
     description:
       "A very informative book about the history of a certain school of witchcraft and wizardry.",

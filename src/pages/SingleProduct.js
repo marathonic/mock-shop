@@ -60,7 +60,7 @@ const SingleProduct = (props) => {
         }}
       >
         <h5>{name}</h5>
-        <span>${price.toLocaleString("en-US")}</span>
+        <span>{price.toLocaleString("en-US")} ʛ</span>
         <p>{description}</p>
       </div>
       {/* We actually want to display the 'add to cart' button only if the item isn't yet in the cart */}
