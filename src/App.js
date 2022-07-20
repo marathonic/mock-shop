@@ -22,7 +22,9 @@ function App() {
     JSON.parse(localStorage.getItem("user")) || null
   );
   const [cart, setCart] = useState(false);
-  const [inCart, setInCart] = useState([]); //may be redundant, because:
+  const [inCart, setInCart] = useState(
+    JSON.parse(localStorage.getItem("inCartArr")) || []
+  ); //may be redundant, because:
   const [banner, setBanner] = useState("");
   const [userName, setUserName] = useState("");
   const [userEmail, setUserEmail] = useState("");
@@ -31,7 +33,9 @@ function App() {
   // (we've seen .add() used to count the number of elements in a Set before.)
   //  we'd just need to figure out how to add the values instead.
 
-  const [itemsInCart, setItemsInCart] = useState({});
+  const [itemsInCart, setItemsInCart] = useState(
+    JSON.parse(localStorage.getItem("cartItems")) || {}
+  );
 
   //We have identified a potential problem:
   // We're getting our information from 2 places:
@@ -106,6 +110,28 @@ function App() {
       setUser(user);
     }
   }, []);
+
+  useEffect(() => {
+    localStorage.setItem("cartItems", JSON.stringify(itemsInCart));
+  }, [itemsInCart]);
+
+  useEffect(() => {
+    const cartItems = JSON.parse(localStorage.getItem("cartItems"));
+    if (cartItems) {
+      setItemsInCart(cartItems);
+    }
+  }, []);
+
+  // useEffect(() => {
+  //   localStorage.setItem("inCartArr", JSON.stringify(inCart));
+  // }, [inCart]);
+
+  // useEffect(() => {
+  //   const inCartArr = JSON.parse(localStorage.getItem("inCartArr"));
+  //   if (inCartArr) {
+  //     setInCart(inCartArr);
+  //   }
+  // }, []);
 
   //
 
