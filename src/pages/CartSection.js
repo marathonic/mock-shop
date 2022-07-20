@@ -29,33 +29,31 @@ const CartSection = ({
   useEffect(() => {
     const updateCost = () => {
       setCost(() => {
-        //we logged to console both noRepeats and itemsInCart from here, succesfully. Values were up to date.
-        const itemsBeingBought = [];
-        for (let nameOfItem of Object.keys(itemsInCart)) {
-          // if (itemsInCart[nameOfItem] > 0) {
-          //   itemsBeingBought.push(nameOfItem);
-          // }
-          //actually, we need all indexes, so that we can match each index here to the other array.
-          itemsBeingBought.push(nameOfItem); // <--- but isn't this the same as noRepeats?
-        }
-        console.log(itemsBeingBought);
-        //Success. Now we get the price of each item.
-        const costsOfMatchingItems = noRepeats.filter((obj) =>
-          itemsBeingBought.includes(obj.name)
-        );
-        console.log(costsOfMatchingItems);
-        //Success. Now we have to get the values to multiply:
-        const quantityOfItemsBeingBought = [];
-        for (let nameOfItem of Object.keys(itemsInCart)) {
-          if (itemsInCart[nameOfItem] > 0) {
-            quantityOfItemsBeingBought.push(itemsInCart[nameOfItem]);
+        const arrayedQuantities = [];
+        for (let qty of Object.values(itemsInCart)) {
+          if (qty > 0) {
+            arrayedQuantities.unshift(qty);
           }
         }
-        console.log(quantityOfItemsBeingBought);
 
-        //WHAT THE FUCK..........
-        // I think this may be wrong. redo the whole thing.
-        // }
+        console.log("arrayedQuantities below");
+        console.log(arrayedQuantities);
+
+        const priceTags = [];
+        for (let i = 0; i < noRepeats.length; i++) {
+          priceTags.push(noRepeats[i].price);
+        }
+        // ^the price tags for this loop are locked in safely in their own array.
+        const multipliedPrices = [];
+        for (let i = 0; i < priceTags.length; i++) {
+          multipliedPrices.push(arrayedQuantities[i] * priceTags[i]);
+        }
+        // multipliedPrices.push(priceTags[i] * arrayedQuantities[i]);
+        console.log(priceTags);
+        console.log(multipliedPrices);
+        //^^^next, just reduce multipliedPrices and return that value. We have our value to display!
+        return multipliedPrices;
+        // next, the quantities.
       });
     };
 
@@ -148,7 +146,7 @@ const CartSection = ({
       {/* {!user && <Link to="/login">please log in </Link>} */}
       <LoginBtn user={user} />
       {/* <span>Your total: {getOrderTotal().toLocaleString("en-US")}</span> */}
-      <span>Your total: {}</span>
+      <span>Your total: {cost}</span>
     </div>
   );
 };
