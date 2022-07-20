@@ -32,38 +32,7 @@ function App() {
   //  we'd just need to figure out how to add the values instead.
 
   const [itemsInCart, setItemsInCart] = useState({});
-  const [numberOfItemsInCart, setNumberOfItemsInCart] = useState(0);
-  const countAllItems = (obj) => Object.values(obj).reduce((a, b) => a + b, 0);
-  const [orderTally, setOrderTally] = useState(0);
 
-  const getOrderTotal = () => {
-    setOrderTally((prevTally) => {
-      // let orderTotal = prevTally;
-      const orderTotal = inCart
-        .filter((item) => itemsInCart[item.name] >= 1)
-        .reduce((total, obj) => obj.price + total, 0);
-      // const orderTotal = Object.keys(noEmptyQty).reduce(function(previous, key) {
-      //   return previous + noEmptyQty[key].value
-      // })
-      //let orderTotal = reduce all the values in noEmpty
-      // for (let i = 0; i < noEmptyQty.length; i++) {
-      //   let current = noEmptyQty[i];
-      //   orderTotal += current.price;
-      // }
-      return orderTotal;
-    });
-  };
-
-  useEffect(() => {
-    getOrderTotal();
-  });
-
-  useEffect(() => {
-    setNumberOfItemsInCart((prevNumberOfItemsInCart) => {
-      const newCount = countAllItems(itemsInCart);
-      return newCount;
-    });
-  }, [itemsInCart]);
   //We have identified a potential problem:
   // We're getting our information from 2 places:
   // inCart: is an array of objects, each object has multiple properties.
@@ -160,7 +129,7 @@ function App() {
   // and each time, get a new object with all the 'itemName' keys paired with the respective value.
   // This also simplifies our 'cart preview (not real name)' functionality,
   // since we can just display the total from adding all those values together.
-  const removeOneItemFromCart = (itemName, itemId) => {
+  const removeOneItemFromCart = (itemName) => {
     //this function updates the itemsInCart, where the Quantity spans get their values from.
     setItemsInCart((prevItemsInCart) => {
       // We should have a condition for when there is only 1 of that item in the cart.
@@ -174,14 +143,6 @@ function App() {
 
       return newCart;
     });
-
-    setInCart((prevInCart) => {
-      const toModify = [...prevInCart];
-      toModify.splice(
-        toModify.indexOf(toModify.findIndex((obj) => obj.id === itemId))
-      );
-      return toModify;
-    });
   };
 
   const removeFromCart = (itemId) => {
@@ -194,7 +155,7 @@ function App() {
     });
   };
 
-  function ItemCounter(itemName, itemObj, itemId) {
+  function ItemCounter(itemName, itemObj) {
     const btnStyle = {
       pointerEvents: "none",
       color: "palevioletred",
@@ -206,8 +167,8 @@ function App() {
           className="counter-btn"
           onClick={() => {
             itemsInCart[itemName] > 1
-              ? removeOneItemFromCart(itemName, itemId)
-              : resetItemCount(itemName, itemId);
+              ? removeOneItemFromCart(itemName)
+              : resetItemCount(itemName);
           }}
         >
           <FaMinus style={btnStyle} />
@@ -241,13 +202,7 @@ function App() {
     );
   }
 
-  const resetItemCount = (itemName, itemId) => {
-    // I FIGURED OUT WHAT'S GOING ON,
-    // Why when we reduce an item to 0, and then add 1 of it, our total says we have 2 of it. This is why:
-    // It's because we have a condition on our onClick for the MINUS button, and this is what it does:
-    // When the item count is more than 1, and we subtract 1 item, we're updating BOTH the object and the count.
-    // BUT THEN, when the count is 1, our other condition triggers, which is updating ONLY the count object!
-    // THE SOLUTION? WE NEED TO ALSO EDIT THE OBJECT IN OUR SECOND ( : ) CONDITION, WHEN THE COUNT IS 1.
+  const resetItemCount = (itemName) => {
     setItemsInCart((prevItemsInCart) => {
       const newCart = {
         ...prevItemsInCart,
@@ -255,18 +210,6 @@ function App() {
       };
       console.log(newCart);
       return newCart;
-    });
-
-    setInCart((prevInCart) => {
-      const toModify = [...prevInCart];
-      // toModify.splice(
-      //   toModify.indexOf(toModify.findIndex((obj) => obj.id === itemId))
-      // );
-      const toRemove = toModify.splice(
-        toModify.indexOf(toModify.findIndex((obj) => obj.id === itemId))
-      );
-      const newArr = toModify.filter((obj) => obj === toRemove);
-      return newArr;
     });
   };
 
@@ -276,13 +219,7 @@ function App() {
         <Routes>
           <Route
             path="/"
-            element={
-              <SharedLayout
-                itemsInCart={itemsInCart}
-                user={user}
-                numberOfItemsInCart={numberOfItemsInCart}
-              />
-            }
+            element={<SharedLayout itemsInCart={itemsInCart} user={user} />}
           >
             <Route index element={<Home user={user} banner={banner} />} />
             <Route path="about" element={<About />} />
@@ -340,7 +277,6 @@ function App() {
                   removeOneItemFromCart={removeOneItemFromCart}
                   ItemCounter={ItemCounter}
                   user={user}
-                  orderTally={orderTally}
                 />
               }
             />

@@ -60,7 +60,7 @@ const SingleProduct = (props) => {
         }}
       >
         <h5>{name}</h5>
-        <span>{price.toLocaleString("en-US")} ʛ</span>
+        <span>${price.toLocaleString("en-US")}</span>
         <p>{description}</p>
       </div>
       {/* We actually want to display the 'add to cart' button only if the item isn't yet in the cart */}
@@ -79,7 +79,7 @@ const SingleProduct = (props) => {
           </button>
         </div>
       ) : (
-        ItemCounter(name, product, productId)
+        ItemCounter(name, product)
         // ^^^ All we did here was put all the code that was here into the ItemCounter function.
         // It works the same, but if we want to place the code here instead, simply copy and paste it here,
         // starting right after the return statement in the ItemCounter functional component.

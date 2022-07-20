@@ -2,7 +2,6 @@ import React, { useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { nanoid } from "nanoid";
 import { IoCartOutline } from "react-icons/io5";
-import { FaInfoCircle } from "react-icons/fa";
 import countAllItems from "../components/helper-functions/countAllItems";
 
 const CartSection = ({
@@ -12,7 +11,6 @@ const CartSection = ({
   resetItemCount,
   ItemCounter,
   user,
-  orderTally,
 }) => {
   // Pass a new function from App.js (emptyItemFromCart)
   // This function will set the state of inCart to a filtered array that doesn't include any objects which contain the property id
@@ -21,14 +19,36 @@ const CartSection = ({
 
   //
   //Option 2: make a new Set with no repeated elements (in this case, our item objects)
-  const [conversionDisplay, setConversionDisplay] = React.useState(false);
+  const [orderTally, setOrderTally] = React.useState(0);
+
   const noEmptyQty = inCart.filter((item) => itemsInCart[item.name] >= 1);
   const noRepeats = [...new Set(noEmptyQty)];
-  console.log("NEXT LINE IS noEmptyQty");
-  console.log(noEmptyQty);
   const totalItemCount = countAllItems(itemsInCart);
 
   // Maybe try a useEffect?
+
+  const getOrderTotal = () => {
+    setOrderTally((prevTally) => {
+      // let orderTotal = prevTally;
+      const orderTotal = noEmptyQty.reduce(
+        (total, obj) => obj.price + total,
+        0
+      );
+      // const orderTotal = Object.keys(noEmptyQty).reduce(function(previous, key) {
+      //   return previous + noEmptyQty[key].value
+      // })
+      //let orderTotal = reduce all the values in noEmpty
+      // for (let i = 0; i < noEmptyQty.length; i++) {
+      //   let current = noEmptyQty[i];
+      //   orderTotal += current.price;
+      // }
+      return orderTotal;
+    });
+  };
+
+  useEffect(() => {
+    getOrderTotal();
+  });
 
   const LoginBtn = ({ user }) => {
     if (!user && totalItemCount > 0) {
@@ -73,20 +93,20 @@ const CartSection = ({
           <span className="cart-section-item-name">{itemObj.name}</span>
           <div className="cart-price-div">
             <span className="cart-price-span">
-              {itemObj.price.toLocaleString("en-US")} ʛ
+              ${itemObj.price.toLocaleString("en-US")}
             </span>
           </div>
           <div className="cart-section-quantity">
             <span className="qty">QTY:</span>
-            <span>{ItemCounter(itemObj.name, itemObj, itemObj.id)}</span>
+            <span>{ItemCounter(itemObj.name, itemObj)}</span>
             {/* <h5> {itemsInCart[itemObj.name]}</h5> */}
             {/* ^^^ holds a numeric value (how many of this item in cart) */}
           </div>
           <button
             className="remove-item-btn"
             onClick={() => {
-              resetItemCount(itemObj.name, itemObj.id);
               removeFromCartTotally(itemObj.id);
+              resetItemCount(itemObj.name);
             }}
           >
             remove
@@ -98,7 +118,7 @@ const CartSection = ({
   });
 
   return (
-    <div className="cart-section" style={{ marginBottom: "20%" }}>
+    <div className="cart-section">
       {totalItemCount > 0 && <h5 style={{ textAlign: "center" }}>Your Cart</h5>}
       {totalItemCount === 0 && (
         <span>
@@ -112,31 +132,9 @@ const CartSection = ({
       <div className="cart-list-overview">{allItems}</div>
       {/* if !user, show the following button. */}
       {/* {!user && <Link to="/login">please log in </Link>} */}
-      {/* <span>Your total: {getOrderTotal().toLocaleString("en-US")}</span> */}
-      {totalItemCount > 0 && (
-        <span style={{ fontSize: "1.32rem" }}>
-          Your total: {orderTally.toLocaleString("en-US")} ʛ.
-          <button
-            onClick={() => setConversionDisplay(!conversionDisplay)}
-            style={{ border: "none", backgroundColor: "transparent" }}
-          >
-            <FaInfoCircle
-              style={{ pointerEvents: "none", color: "skyblue" }}
-              size={17}
-            />
-          </button>
-          {conversionDisplay && (
-            <span style={{ fontSize: "0.9rem", color: "darkgray" }}>
-              <div>
-                <span>In Muggle currency:</span>
-              </div>
-              <div>£{(orderTally * 4.93).toLocaleString("en-US")}</div>
-              <div>${(orderTally * 6.64).toLocaleString("en-US")}</div>
-            </span>
-          )}
-        </span>
-      )}
       <LoginBtn user={user} />
+      {/* <span>Your total: {getOrderTotal().toLocaleString("en-US")}</span> */}
+      <span>Your total: {orderTally}</span>
     </div>
   );
 };
