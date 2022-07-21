@@ -28,7 +28,7 @@ function Home({ user, banner }) {
             style={{
               display: "flex",
               flexDirection: "column",
-              marginInline: "0.3rem",
+              marginInline: "0.6rem",
             }}
           >
             <img

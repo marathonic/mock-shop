@@ -601,7 +601,7 @@ section.product button {
   .products {
     display: flex;
     flex-direction: column;
-    gap: 2rem;
+    gap: 1.5rem;
   }
 
   .products article {
@@ -798,6 +798,10 @@ article.cart-section-item:not(:last-of-type) {
 .cart-section-details > button {
   margin-left: 0;
   z-index: 1;
+}
+
+.add-item-counter {
+  margin-inline: 6%
 }
 
 }

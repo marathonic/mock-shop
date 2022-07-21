@@ -48,7 +48,7 @@ const products = [
   {
     id: "Ve5aqLyhXGLHJi2y",
     name: "Veritaserum",
-    price: 6400,
+    price: 6000,
     available: 10,
     description: "A small vial of Veritaserum. Good for one use.",
     image: "../veritaserum.jpg",

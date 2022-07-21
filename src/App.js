@@ -171,7 +171,7 @@ function App() {
               : resetItemCount(itemName);
           }}
         >
-          <FaMinus style={btnStyle} />
+          <FaMinus style={btnStyle} size={18} />
         </button>
         <span className="add-item-counter">{itemsInCart[itemName]}</span>
         {itemsInCart[itemName] < itemObj.available ? (
@@ -182,21 +182,23 @@ function App() {
               addItemToCart(itemName);
             }}
           >
-            <FaPlus style={btnStyle} />
+            <FaPlus style={btnStyle} size={18} />
           </button>
         ) : (
-          <button>
-            <FcCancel />
-            <span
-              style={{
-                position: "absolute",
-                bottom: "5",
-                right: "42%",
-              }}
-            >
-              limit: {itemObj.available}
-            </span>
+          <button
+            style={{
+              border: "none",
+              backgroundColor: "pink",
+              color: "palevioletred",
+            }}
+          >
+            <FcCancel size={18} />
           </button>
+        )}
+        {itemsInCart[itemName] >= itemObj.available && (
+          <div>
+            <span>only {itemObj.available} in stock</span>
+          </div>
         )}
       </div>
     );
