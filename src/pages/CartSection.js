@@ -69,7 +69,11 @@ const CartSection = ({
         >
           <button
             className="btn"
-            style={{ width: "max-content", textAlign: "center" }}
+            style={{
+              width: "max-content",
+              textAlign: "center",
+              marginBottom: "5rem",
+            }}
             onClick={() =>
               window.open(
                 "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
@@ -140,7 +144,7 @@ const CartSection = ({
       )}
       <div className="cart-list-overview">{allItems}</div>
       {totalItemCount > 0 && (
-        <span style={{ fontSize: "1.32rem" }}>
+        <span style={{ fontSize: "1.32rem", marginBottom: "1rem" }}>
           Your total: {cost.toLocaleString("en-US")} ʛ.
           <button
             onClick={() => setConversionDisplay(!conversionDisplay)}

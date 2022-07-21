@@ -38,7 +38,7 @@ const Login = ({ user, setUser }) => {
         <h5>log in</h5>
         <div className="form-row">
           <label htmlFor="name" className="form-label">
-            Hogworse's student ID
+            First Name
           </label>
           <input
             type="text"
@@ -50,7 +50,7 @@ const Login = ({ user, setUser }) => {
         </div>
         <div className="form-row">
           <label htmlFor="email" className="form-label">
-            Secret phrase
+            e-mail address
           </label>
           <input
             type="email"
