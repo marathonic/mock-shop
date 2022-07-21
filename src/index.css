@@ -303,7 +303,7 @@ ul {
 .products {
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-between;
+  justify-content: center;
   gap: 3rem;
 }
 
@@ -401,10 +401,12 @@ img.welcome-banner {
 
 .best-sellers-list {
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
   list-style: none;
   
   padding: 0;
+  margin-bottom: 5rem;
+  overflow:auto
 }
 
 button {
@@ -599,6 +601,7 @@ section.product button {
   .products {
     display: flex;
     flex-direction: column;
+    gap: 2rem;
   }
 
   .products article {

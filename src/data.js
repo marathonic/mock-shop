@@ -47,7 +47,7 @@ const products = [
 
   {
     id: "Ve5aqLyhXGLHJi2y",
-    name: "veritaserum",
+    name: "Veritaserum",
     price: 6400,
     available: 10,
     description: "A small vial of Veritaserum. Good for one use.",
@@ -58,7 +58,8 @@ const products = [
     name: "Nobushi 2000",
     price: 5000,
     available: 6,
-    description: "The fastest racing broom there is",
+    description:
+      "The most popular broom in professional Quidditch, for good reason.",
     image: "../nimbus.jpg",
   },
   {
@@ -67,7 +68,7 @@ const products = [
     price: 100,
     available: 6,
     description:
-      "From the Timeless collection, by famed designer Gandalarmani. One size to fit them all. Woven from 100% Sumerian wool.",
+      "From the Timeless collection, by famed designer Gandalfarmani. One size to fit them all. Woven from 100% Sumerian wool.",
     image: "../cloak.png",
   },
   {
@@ -93,7 +94,7 @@ const products = [
     name: "Ember Phoenix Wand",
     price: 3200,
     available: 10,
-    description: "Crafted from the ashes of a Phoenix. Maker unknown",
+    description: "Crafted from the ashes of a Phoenix. Maker unknown...",
     image: "../wand.jpg",
   },
 ];

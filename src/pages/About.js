@@ -11,6 +11,7 @@ const About = () => {
           flexDirection: "column",
           alignItems: "center",
           justifyContent: "center",
+          fontSize: "1.5rem",
         }}
       >
         <p>
@@ -26,9 +27,6 @@ const About = () => {
           up your items in store. We just miss you that much!
         </p>
       </div>
-      <Link to="/" className="btn">
-        go to Home
-      </Link>
     </section>
   );
 };
