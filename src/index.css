@@ -324,6 +324,7 @@ ul {
 .cart-list-overview > article.cart-section-item {
   display: flex;
   justify-content: center;
+  margin-bottom: 0;
 }
 
 
@@ -354,6 +355,8 @@ ul {
 .cart-list-overview {
   /* text-align: center; */
   /* padding-left: 32%; */
+  background-color: white;
+  margin-bottom: 1rem;
 }
 
 /* my own styling */
@@ -528,7 +531,7 @@ section.product button {
   cursor: pointer;
   color: darkred;
   background: peachpuff;
-  opacity: 70%;
+  opacity: 100%;
   border: transparent;
   letter-spacing: var(--letterSpacing);
   margin-top: 5%;
@@ -780,7 +783,7 @@ section.product button {
 
 article.cart-section-item:not(:last-of-type) {
   
-  border-bottom: 1px solid peachpuff;
+  border-bottom: 3px solid whitesmoke;
 }
 
 

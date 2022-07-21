@@ -21,6 +21,12 @@ const CartSection = ({
 
   //
   //Option 2: make a new Set with no repeated elements (in this case, our item objects)
+  const linkedImg = {
+    display: "flex",
+    width: "max-content",
+    height: "max-content",
+    alignItems: "flex-end",
+  };
 
   const noEmptyQty = inCart.filter((item) => itemsInCart[item.name] >= 1);
   // not using noRepeats anymore
@@ -92,7 +98,7 @@ const CartSection = ({
   const allItems = noRepeats.map((itemObj) => {
     return (
       <article className="cart-section-item" key={nanoid()}>
-        <Link to={`/products/${itemObj.id}`}>
+        <Link style={linkedImg} to={`/products/${itemObj.id}`}>
           <img
             src={itemObj.image}
             alt={itemObj.name}
@@ -156,7 +162,7 @@ const CartSection = ({
             />
           </button>
           {conversionDisplay && (
-            <span style={{ fontSize: "0.9rem", color: "darkgray" }}>
+            <span style={{ fontSize: "1.1rem", color: "teal" }}>
               <div>
                 <span>In Muggle currency:</span>
               </div>
